@@ -1,10 +1,10 @@
 import React from 'react';
 
 class Form extends React.Component {
-    render(){
-        return(
+    render() {
+        return (
             <div>
-             <h2>hiiiii</h2>
+                <h2>hiiiii</h2>
                 <p>hi</p>
             </div>
         )

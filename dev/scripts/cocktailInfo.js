@@ -1,8 +1,8 @@
 import React from 'react';
 
 class CocktailInfo extends React.Component {
-    render(){
-        return(
+    render() {
+        return (
             <h2>hi</h2>
         )
     }
