@@ -26,7 +26,7 @@ class App extends React.Component {
       return (
         <div>
           <header>
-            <h1>Moondollars!</h1>
+            <h1>Moooooooooondollars!</h1>
           </header>
           <Gallery />
           <CocktailInfo />
