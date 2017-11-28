@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Gallery from './gallery';
-import CocktailInfo from './cocktailInfo';
-import axios from 'axios';
+import Gallery from './gallery.js';
 
 // pseudo code:
 

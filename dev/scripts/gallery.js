@@ -1,5 +1,4 @@
 import React from 'react';
-import Form from './form.js';
 
 class Gallery extends React.Component {
     constructor() {
@@ -24,16 +23,14 @@ class Gallery extends React.Component {
     render() {
         return (
             <div>
-                <h1>hi</h1>
-                {/* {this.state.cocktails.map(cocktail => {
+                {this.state.cocktails.map(cocktail => {
                     return (
-                            // <div key={cocktail.id}>
-                            //     <h2>{cocktail.name}</h2>
-                            //     <img src={``} alt={``} />
-                            // </div>
-                            <h1>workkk</h1>
+                        <div key={cocktail.id}>
+                            <h2>{cocktail.name}</h2>
+                            <img src={``} alt={`Image of ${cocktail}`} />
+                        </div>
                     )
-                })} */}
+                })}
             </div>
 
         )
@@ -41,4 +38,4 @@ class Gallery extends React.Component {
 }
 
 
-export default Gallery;
+export default 'Gallery';
