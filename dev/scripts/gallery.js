@@ -24,7 +24,8 @@ class Gallery extends React.Component {
     render() {
         return (
             <div>
-                <h1>hiiii</h1>
+                <h1>hi</h1>
+                <p>hi</p>
                 {/* {this.state.cocktails.map(cocktail => {
                     return (
                             // <div key={cocktail.id}>

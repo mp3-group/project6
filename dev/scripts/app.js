@@ -26,7 +26,8 @@ class App extends React.Component {
       return (
         <div>
           <header>
-            <h1>Moooooooooondollaaars!</h1>
+            <h1>Moooooooooondollars!</h1>
+            <p>hi</p>
           </header>
           <Gallery />
           <CocktailInfo />
