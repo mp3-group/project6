@@ -7,7 +7,7 @@ class Gallery extends React.Component {
         this.state = {
             cocktails: [],
             isToggleOn: false,
-            key: '',
+            showCocktailID: '',
             selectedValue: ''
         }
 
@@ -23,7 +23,7 @@ class Gallery extends React.Component {
                 q:`coffee ${alcohol}`
             }
         }).then((res) => {
-            console.log(res);
+            console.log(res.data.matches);
             this.setState({
                 cocktails: res.data.matches
             })
@@ -31,15 +31,16 @@ class Gallery extends React.Component {
         })
     }
 
-    getCocktailRecipe(e) {
+    getCocktailRecipe(cocktail) {
         // e.preventDefault();
-        console.log('clicked!')
        
         this.setState(prevState => ({
-            isToggleOn: !prevState.isToggleOn,
-            // key: e.target.key
+            // id: cocktail,
+            showCocktailID: cocktail
+            // isToggleOn: !prevState.isToggleOn
+            
         }));
-     console.log(e.target.key);
+     
     }
 
     getLiqourBrand() {
@@ -58,25 +59,27 @@ class Gallery extends React.Component {
         return (
             <div>
 
-                
-                <ul>
-                    <li onClick={this.handleChange} value="rum">Rum</li>
-                    <li onClick={this.handleChange} value="whiskey">Whiskey</li>
-                    <li onClick={this.handleChange} value="irish">Irish Cream</li>
-                    <li onClick={this.handleChange} value="vodka">Vodka</li>
-                </ul>
-
+                <select value={this.state.selectedValue}
+                    onChange={this.handleChange}>
+                    <option value="rum">Rum</option>
+                    <option value="whiskey">Whiskey</option>
+                    <option value="irish">Irish Cream</option>
+                    <option value="vodka">Vodka</option>
+                </select>
+               
 
                 {this.state.cocktails.map(cocktail => 
-                    <li onClick={this.getCocktailRecipe} key={cocktail.id}>
+
+                    <li onClick={()=>this.getCocktailRecipe(cocktail.id)}  key={cocktail.id}>
                         {cocktail.recipeName}
                         <img src={cocktail.smallImageUrls[0].replace(/90$/,'500')} />
-                        {this.state.isToggleOn ? <p>{cocktail.ingredients}</p> : null}
+
+                        {this.state.showCocktailID === cocktail.id ? <p>{cocktail.ingredients}</p> : null}
                         
                     </li>
                     
                 )}
-
+            
             </div>
         );
     }
