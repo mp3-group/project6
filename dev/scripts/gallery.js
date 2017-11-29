@@ -44,7 +44,7 @@ class Gallery extends React.Component {
     }
 
     getLiqourBrand() {
-        // TODO: getLiqourBrand() api call
+        
     }
 
     handleChange(e) {
