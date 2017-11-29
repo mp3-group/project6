@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Gallery from './gallery';
-import CocktailInfo from './cocktailInfo';
-import axios from 'axios';
+import Gallery from './gallery.js';
 
 // pseudo code:
 
@@ -29,8 +27,10 @@ class App extends React.Component {
             <h1>Moooooooooondollars!</h1>
             <p>hi</p>
           </header>
-          <Gallery />
-          <CocktailInfo />
+          {/* <ul> */}
+            <Gallery />
+          {/* </ul> */}
+          {/* <CocktailInfo /> */}
         </div>
       )
     }
