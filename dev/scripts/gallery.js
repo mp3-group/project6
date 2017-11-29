@@ -12,7 +12,6 @@ class Gallery extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
    
-
     getCocktails(alcohol) {
         axios.get(`http://api.yummly.com/v1/api/recipes`, {
             params: {
@@ -45,15 +44,12 @@ class Gallery extends React.Component {
         return (
             <div>
                 
-                <select 
-                    value={this.state.selectedValue}
-                    onChange={this.handleChange} 
-                >   
-                    <option value="rum">Rum</option>
-                    <option value="whiskey">Whiskey</option>
-                    <option value="irish">Irish Cream</option>
-                    <option value="vodka">Vodka</option>
-                </select>
+                <ul>
+                    <li onClick={this.handleChange} value="rum">Rum</li>
+                    <li onClick={this.handleChange} value="whiskey">Whiskey</li>
+                    <li onClick={this.handleChange} value="irish">Irish Cream</li>
+                    <li onClick={this.handleChange} value="vodka">Vodka</li>
+                </ul>
                 {this.state.cocktails.map(cocktail => 
                     <li key={cocktail.id}>
                         <p>{cocktail.recipeName}</p>
