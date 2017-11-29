@@ -19,12 +19,8 @@ class Gallery extends React.Component {
                 _app_id: '8c73dac4',
                 _app_key: '02fdeca1ea3fe3a3ff3f13b6ad559a80',
                 q:`coffee ${alcohol}`
-
-                // api_key: `02fdeca1ea3fe3a3ff3f13b6ad559a80`,
-
             }
         }).then((res) => {
-            console.log(res.data.matches);
             this.setState({
                 cocktails: res.data.matches
             })
@@ -40,7 +36,6 @@ class Gallery extends React.Component {
     }
 
     handleChange(e) {
-        console.log(e.target.value);
         this.setState({selectedValue: e.target.value}, 
             () => this.getCocktails(this.state.selectedValue)
         );
