@@ -1,0 +1,38 @@
+.alcoholOption {
+    list-style: none;
+}
+
+.alcoholOption {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 80%;
+    margin: 0 auto;
+    box-shadow: 0 0 10px #222;
+}
+
+.alcoholOption li {
+    width: 25%;
+    height: 70vh;
+    float: left;
+    background: #1abc9c;
+    &:nth-child(2){
+        background: #2ecc71;
+    }
+    &:nth-child(3){
+        background: #3498db;
+    }
+    &:nth-child(4){
+        background: #9b59b6;
+    }
+}
+
+.stretch {
+    width: 35%;
+}
+.shrink {
+    width: 16.5%;
+}
+
+
+
