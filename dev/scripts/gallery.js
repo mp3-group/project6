@@ -57,6 +57,7 @@ class Gallery extends React.Component {
     render() {
         return (
             <div>
+
                 
                 <ul>
                     <li onClick={this.handleChange} value="rum">Rum</li>
@@ -64,6 +65,7 @@ class Gallery extends React.Component {
                     <li onClick={this.handleChange} value="irish">Irish Cream</li>
                     <li onClick={this.handleChange} value="vodka">Vodka</li>
                 </ul>
+
 
                 {this.state.cocktails.map(cocktail => 
                     <li onClick={this.getCocktailRecipe} key={cocktail.id}>
