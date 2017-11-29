@@ -46,25 +46,36 @@ class Gallery extends React.Component {
     }
 
     handleChange(e) {
+
         this.setState({
             selectedValue: e.target.value
             }, 
+
             () => this.getCocktails(this.state.selectedValue)
         );
     }
 
     render() {
         return (
-            <div>
-
-                <select value={this.state.selectedValue}
-                    onChange={this.handleChange}>
-                    <option value="rum">Rum</option>
-                    <option value="whiskey">Whiskey</option>
-                    <option value="irish">Irish Cream</option>
-                    <option value="vodka">Vodka</option>
-                </select>
-               
+            <div>                
+                <form className="alcoholOption" value={this.state.selectedValue} onChange={this.handleChange}>   
+                    <label>
+                        <input type="radio" value="rum" checked={this.state.selectedOption === 'rum'}/>
+                        Rum
+                    </label>
+                    <label>
+                        <input type="radio" value="whiskey" checked={this.state.selectedOption === 'whiskey'}/>
+                        Whiskey
+                    </label>
+                    <label>
+                        <input type="radio" value="irish" checked={this.state.selectedOption === 'irish'}/>
+                        Irish Cream
+                    </label>
+                    <label>
+                        <input type="radio" value="vodka" checked={this.state.selectedOption === 'vodka'}/>
+                        Vodka
+                    </label>
+                </form>    
 
                 {this.state.cocktails.map(cocktail => 
 
