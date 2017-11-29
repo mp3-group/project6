@@ -6,36 +6,50 @@ class Gallery extends React.Component {
         super();
         this.state = {
             cocktails: [],
+            isToggleOn: false,
+            key: '',
             selectedValue: ''
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.getCocktailRecipe = this.getCocktailRecipe.bind(this);
     }
    
     getCocktails(alcohol) {
         axios.get(`http://api.yummly.com/v1/api/recipes`, {
             params: {
-                _app_id: '8c73dac4',
-                _app_key: '02fdeca1ea3fe3a3ff3f13b6ad559a80',
+                _app_id: 'bd90db8c',
+                _app_key: '09d9084e61038c6296815d0591809343',
                 q:`coffee ${alcohol}`
             }
         }).then((res) => {
+            console.log(res);
             this.setState({
                 cocktails: res.data.matches
             })
+
         })
     }
 
-    getCocktailRecipe() {
-        // TODO: getCocktailRecipe() api call
+    getCocktailRecipe(e) {
+        // e.preventDefault();
+        console.log('clicked!')
+       
+        this.setState(prevState => ({
+            isToggleOn: !prevState.isToggleOn,
+            // key: e.target.key
+        }));
+     console.log(e.target.key);
     }
 
     getLiqourBrand() {
-        // TODO: getLiqourBrand() api call
+        
     }
 
     handleChange(e) {
-        this.setState({selectedValue: e.target.value}, 
+        this.setState({
+            selectedValue: e.target.value
+            }, 
             () => this.getCocktails(this.state.selectedValue)
         );
     }
@@ -43,6 +57,7 @@ class Gallery extends React.Component {
     render() {
         return (
             <div>
+
                 
                 <ul>
                     <li onClick={this.handleChange} value="rum">Rum</li>
@@ -50,17 +65,27 @@ class Gallery extends React.Component {
                     <li onClick={this.handleChange} value="irish">Irish Cream</li>
                     <li onClick={this.handleChange} value="vodka">Vodka</li>
                 </ul>
+
+
                 {this.state.cocktails.map(cocktail => 
-                    <li key={cocktail.id}>
-                        <p>{cocktail.recipeName}</p>
+                    <li onClick={this.getCocktailRecipe} key={cocktail.id}>
+                        {cocktail.recipeName}
                         <img src={cocktail.smallImageUrls[0].replace(/90$/,'500')} />
+                        {this.state.isToggleOn ? <p>{cocktail.ingredients}</p> : null}
+                        
                     </li>
+                    
                 )}
 
             </div>
         );
     }
 }
+
+class CocktailRecipe extends React.Component {
+
+}
+
 
 
 export default Gallery;

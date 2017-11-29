@@ -25,8 +25,11 @@ class App extends React.Component {
         <div>
           <header>
             <h1>Moooooooooondollars!</h1>
+            <p>hi</p>
           </header>
-          <Gallery />
+          {/* <ul> */}
+            <Gallery />
+          {/* </ul> */}
           {/* <CocktailInfo /> */}
         </div>
       )
