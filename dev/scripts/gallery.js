@@ -35,9 +35,7 @@ class Gallery extends React.Component {
         // e.preventDefault();
        
         this.setState(prevState => ({
-            // id: cocktail,
             showCocktailID: cocktail
-            // isToggleOn: !prevState.isToggleOn
             
         }));
      
@@ -74,7 +72,7 @@ class Gallery extends React.Component {
                         {cocktail.recipeName}
                         <img src={cocktail.smallImageUrls[0].replace(/90$/,'500')} />
 
-                        {this.state.showCocktailID === cocktail.id ? <p>{cocktail.ingredients}</p> : null}
+                        {this.state.showCocktailID === cocktail.id ? <CocktailInfo alcohol={this.state.selectedValue}ingredients={cocktail.ingredients}/> : null}
                         
                     </li>
                     
@@ -85,10 +83,24 @@ class Gallery extends React.Component {
     }
 }
 
-class CocktailRecipe extends React.Component {
-
+class CocktailInfo extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            ingredients:props.ingredients,
+            alcohol:props.alcohol
+        }
+        // this.getCocktailRecipe = this.getCocktailRecipe.bind(this);
+    }
+    render(){
+        return(
+            <div>
+                {this.state.ingredients}
+                {/* this is what we'll use to link to the lcbo api: */}
+                <p>{this.state.alcohol}</p>
+            </div>
+        )
+    }
 }
-
-
 
 export default Gallery;
