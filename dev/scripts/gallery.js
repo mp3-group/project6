@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Qs from 'qs';
 
 class Gallery extends React.Component {
     constructor() {
@@ -82,7 +83,6 @@ class Gallery extends React.Component {
                     <li onClick={()=>this.getCocktailRecipe(cocktail.id)}  key={cocktail.id}>
                         {cocktail.recipeName}
                         <img src={cocktail.smallImageUrls[0].replace(/90$/,'500')} />
-
                         {this.state.showCocktailID === cocktail.id ? <CocktailInfo alcohol={this.state.selectedValue}ingredients={cocktail.ingredients}/> : null}
                         
                     </li>
@@ -98,17 +98,46 @@ class CocktailInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            liquors: [],
             ingredients:props.ingredients,
             alcohol:props.alcohol
         }
-        // this.getCocktailRecipe = this.getCocktailRecipe.bind(this);
+        
     }
+   
+    componentDidMount(liquor) {
+        axios({
+            method: 'GET',
+            url: 'http://proxy.hackeryou.com',
+            dataResponse: 'json',
+            paramsSerializer: function (params) {
+                return Qs.stringify(params, { arrayFormat: 'brackets' })
+            },
+            params: {
+                reqUrl: 'http://lcboapi.com/products?',
+                params: {
+                    _access_key: 'MDo2MWJkNGVlZS1kNDgxLTExZTctODVkNC05ZjYwOTU5N2ExMWU6TTZycmVONzJ4N1RrYWtQdXZCMml2OTFDNUpNa1lhbEpQVnNz',
+                    q: `${this.state.alcohol}`
+                },
+            }
+        }).then((res) => {
+            
+            this.setState({
+                liquors: res.data.result
+            })
+            console.log(this.state.liquors);
+        })
+    }
+      
     render(){
         return(
             <div>
                 {this.state.ingredients}
-                {/* this is what we'll use to link to the lcbo api: */}
-                <p>{this.state.alcohol}</p>
+                {this.state.liquors.map(liquor => 
+                    <div key={liquor.id}>
+                        <p>{liquor.name}</p>
+                    </div>
+                )};
             </div>
         )
     }
