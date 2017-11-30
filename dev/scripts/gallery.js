@@ -20,7 +20,10 @@ class Gallery extends React.Component {
             params: {
                 _app_id: 'bd90db8c',
                 _app_key: '09d9084e61038c6296815d0591809343',
-                q:`coffee ${alcohol}`
+                q: `coffee ${alcohol}`,
+                'allowedIngredient[]': alcohol,
+                'allowedCourse[]': 'course^course-Beverages',
+
             }
         }).then((res) => {
             console.log(res.data.matches);
