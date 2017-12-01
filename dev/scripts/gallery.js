@@ -14,7 +14,9 @@ class Gallery extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.getCocktailRecipe = this.getCocktailRecipe.bind(this);
-        this.togglePopup = this.togglePopup.bind(this);                
+        this.togglePopup = this.togglePopup.bind(this);
+                
+
     }
    
     getCocktails(alcohol) {
@@ -43,19 +45,12 @@ class Gallery extends React.Component {
     }
 
     handleChange(e) {
-
         this.setState({
             selectedValue: e.target.value
             }, 
 
             () => this.getCocktails(this.state.selectedValue)
         );
-    }
-
-    togglePopup() {        
-        this.setState({        
-            showPopup: !this.state.showPopup        
-        });        
     }
 
      render() {
@@ -80,23 +75,17 @@ class Gallery extends React.Component {
                         <h2>Vodka</h2>
                     </label>
                 </form>               
-                <ul className="cocktailDisplay">
-                    {this.state.cocktails.map(cocktail => 
+                
+                {this.state.cocktails.map(cocktail => 
+                    <li onClick={()=>this.getCocktailRecipe(cocktail.id)}  key={cocktail.id}>
+                        {cocktail.recipeName}
+                        <img src={cocktail.smallImageUrls[0].replace(/90$/,'500')} />
+                        {this.state.showCocktailID === cocktail.id ? <CocktailInfo alcohol={this.state.selectedValue} ingredients={cocktail.ingredients} cocktailId={cocktail.id}/> : null}
+                        
+                    </li>
                     
-                        <li onClick={()=>this.getCocktailRecipe(cocktail.id)}  key={cocktail.id}>
-                            <h2 style={this.state.styles}>{cocktail.recipeName}</h2>
-                                <img src={cocktail.smallImageUrls[0].replace(/90$/,'500')} />
-
-                            {this.state.showCocktailID === cocktail.id ? 
-                                <CocktailInfo alcohol={this.state.selectedValue}ingredients={cocktail.ingredients}/> : null}
-                            
-                            {this.state.showPopup ?
-                            <Popup className="popUp"
-                                text=''
-                                closePopup={this.togglePopup.bind(this)}/> : null}
-                        </li>
-                    )}
-                </ul>
+                )}
+            
             </div>
         );
     }
@@ -107,6 +96,9 @@ class CocktailInfo extends React.Component {
         super(props);
         this.state = {
             ingredients:props.ingredients,
+            alcohol:props.alcohol,
+            liquors: [],
+            ingredients:props.ingredients,
             alcohol:props.alcohol
         }
         // this.getCocktailRecipe = this.getCocktailRecipe.bind(this);
@@ -114,25 +106,27 @@ class CocktailInfo extends React.Component {
     render(){
         return(
             <div>
-                <p>{this.state.ingredients}</p>
-                
-                {/* this is what we'll use to link to the lcbo api: */}
-                <p>{this.state.alcohol}</p>
+
+                {this.state.ingredients}
+                {this.state.liquors.length > 0 ?
+                <Flickity
+                    className={'carousel'} 
+                    elementType={'div'}  
+                    options={flickityOptions} 
+                    imagesLoaded={true}  
+                >
+                {this.state.liquors.map(liquor => 
+                    <div key={liquor.id} className="liquorBottle">
+                        <img src={liquor.image_url} className="bottleImage"/> 
+                        <p className="liquorName">{liquor.name}</p>
+                    </div>
+                )};
+                    
+                </Flickity>
+                : null}
             </div>
         )
     }
-}
-class Popup extends React.Component  {        
-    render() {        
-    return (        
-        <div className='popup'>        
-            <div className='popup_inner'>        
-                {<p>{this.props.text}</p>}        
-                <button onClick={this.props.closePopup}>Close</button>        
-            </div>        
-        </div>        
-        );        
-    }
-}
+
 
 export default Gallery;
