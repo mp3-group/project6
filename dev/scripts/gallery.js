@@ -1,10 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import Qs from 'qs';
-import flickity from 'flickity';
-import Flickity from 'react-flickity-component'
-import imagesLoaded from 'flickity-imagesloaded';
-
 
 class Gallery extends React.Component {
     constructor() {
@@ -13,12 +8,15 @@ class Gallery extends React.Component {
             cocktails: [],
             isToggleOn: false,
             showCocktailID: '',
-            selectedValue: ''
+            selectedValue: '',
+            showPopup: false
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.getCocktailRecipe = this.getCocktailRecipe.bind(this);
-       
+        this.togglePopup = this.togglePopup.bind(this);
+                
+
     }
    
     getCocktails(alcohol) {
@@ -26,22 +24,13 @@ class Gallery extends React.Component {
             params: {
                 _app_id: 'bd90db8c',
                 _app_key: '09d9084e61038c6296815d0591809343',
-                q: 'coffee',
-                'allowedIngredient[]': alcohol,
-
-                'allowedCourse[]': 'course^course-Beverages',
-                
-                attributes: {
-                    course: "Cocktails"
-                },
-
+                q:`coffee ${alcohol}`
             }
         }).then((res) => {
             console.log(res.data.matches);
             this.setState({
                 cocktails: res.data.matches
             })
-
         })
     }
 
@@ -55,12 +44,7 @@ class Gallery extends React.Component {
      
     }
 
-    getLiqourBrand() {
-        
-    }
-
     handleChange(e) {
-
         this.setState({
             selectedValue: e.target.value
             }, 
@@ -68,31 +52,32 @@ class Gallery extends React.Component {
             () => this.getCocktails(this.state.selectedValue)
         );
     }
-    
-    render() {
+
+     render() {
         return (
-            <div>                
-                <form className="alcoholOption" value={this.state.selectedValue} onChange={this.handleChange}>   
+            <div>
+                <form className="alcoholOption clearfix" value={this.state.selectedValue} onChange={this.handleChange}>
                     <label>
-                        <input type="radio" value="rum" checked={this.state.selectedOption === 'rum'}/>
-                        Rum
+                        <input type="radio" value="rum" checked={this.state.selectedValue === 'rum'}/>
+                        <h2>Rum</h2>
+                    </label>
+
+                    <label>
+                        <input type="radio" value="whiskey" checked={this.state.selectedValue === 'whiskey'}/>
+                        <h2>Whiskey</h2>
                     </label>
                     <label>
-                        <input type="radio" value="whiskey" checked={this.state.selectedOption === 'whiskey'}/>
-                        Whiskey
-                    </label>
-                    <label>
+
                         <input type="radio" value="baileys" checked={this.state.selectedOption === 'baileys'}/>
                         Irish Cream
                     </label>
                     <label>
-                        <input type="radio" value="vodka" checked={this.state.selectedOption === 'vodka'}/>
-                        Vodka
+                        <input type="radio" value="vodka" checked={this.state.selectedValue === 'vodka'}/>
+                        <h2>Vodka</h2>
                     </label>
-                </form>    
-
+                </form>               
+                
                 {this.state.cocktails.map(cocktail => 
-
                     <li onClick={()=>this.getCocktailRecipe(cocktail.id)}  key={cocktail.id}>
                         {cocktail.recipeName}
                         <img src={cocktail.smallImageUrls[0].replace(/90$/,'500')} />
@@ -111,10 +96,13 @@ class CocktailInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            ingredients:props.ingredients,
+            alcohol:props.alcohol,
             liquors: [],
             ingredients:props.ingredients,
             alcohol:props.alcohol
         }
+
         const result = this.calculateServings(0.75, 200, 1750);// TODO: make this dynamic and move this into render method
         console.log(result);
         this.getCocktailRecipe(this.props.cocktailId);// TODO: move this into render method
@@ -175,16 +163,9 @@ class CocktailInfo extends React.Component {
     }
     
     render(){
-        const flickityOptions = {
-            wrapAround: true,
-            imagesLoaded: true,
-            initialIndex: 0,
-            cellAlign: 'left',
-            contain: true
-        }
-        
         return(
             <div>
+
                 <p>commit</p>
                 <input type="text"/>
                 {this.state.ingredients}
@@ -207,8 +188,6 @@ class CocktailInfo extends React.Component {
             </div>
         )
     }
-}
-
 
 
 export default Gallery;

@@ -7,7 +7,13 @@ $secondaryFontStyle: 'Lato', sans-serif;
 
 // ===== Font Colour
 
-$primaryColour: #583E23;
-$primaryColour: #B0A084;
-$primaryColour: #E9E6FF;
-$primaryColour: #13262F;
+$primaryColour: rgb(88, 62, 35);
+$secondaryColour: #B0A084;
+$thirdColour: rgb(233, 230, 255);
+$fourthColour: rgb(19, 38, 47);
+
+// ===== Overlay Colour
+
+$primaryOverlay: rgba(88, 62, 35, .9);
+$secondaryOverlay: rgba(19, 38, 47, .8);
+$thirdOverlay: rgba(233, 230, 255, .3);

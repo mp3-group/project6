@@ -1,0 +1,43 @@
+.alcoholOption {
+    width: 100%;
+    margin:0 auto;
+    position: relative;
+    background: $secondaryColour;
+    box-shadow: 0 -2px 5px $fourthColour;
+    z-index: 50;
+    label {
+        &:hover {
+            cursor: pointer;
+        }
+        h2 {
+            font-family: $primaryFontStyle;
+            font-size: 2rem;
+            display: inline-block;
+            padding: 10px;
+            margin: 0 10px;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+        input[type="radio"] {
+            display: none;
+        }
+    }
+}
+
+#page1 {
+    position: fixed;
+    top: 100%;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow-y: scroll;
+    transition: all .5s ease;
+    background: $fourthColour;
+}
+
+
+
+
+
+
