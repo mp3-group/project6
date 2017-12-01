@@ -131,8 +131,7 @@ class CocktailInfo extends React.Component {
                 params: {
                     _access_key: 'MDo2MWJkNGVlZS1kNDgxLTExZTctODVkNC05ZjYwOTU5N2ExMWU6TTZycmVONzJ4N1RrYWtQdXZCMml2OTFDNUpNa1lhbEpQVnNz',
                     q: `${this.state.alcohol}`,
-                    per_page: 5,
-                    where: 'has_value_added_promotion'
+                    per_page: 5
                 },
             }
         }).then((res) => {
@@ -164,9 +163,9 @@ class CocktailInfo extends React.Component {
                     imagesLoaded={true}  
                 >
                 {this.state.liquors.map(liquor => 
-                    <div key={liquor.id}>
-                        <img src={liquor.image_thumb_url} /> 
-                        <p>{liquor.name}</p>
+                    <div key={liquor.id} className="liquorBottle">
+                        <img src={liquor.image_url} className="bottleImage"/> 
+                        <p className="liquorName">{liquor.name}</p>
                     </div>
                 )};
                     
