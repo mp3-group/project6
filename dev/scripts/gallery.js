@@ -26,10 +26,15 @@ class Gallery extends React.Component {
             params: {
                 _app_id: 'bd90db8c',
                 _app_key: '09d9084e61038c6296815d0591809343',
-                q: `coffee ${alcohol}`,
+                q: 'coffee',
                 'allowedIngredient[]': alcohol,
+
                 'allowedCourse[]': 'course^course-Beverages',
                 
+                attributes: {
+                    course: "Cocktails"
+                },
+
             }
         }).then((res) => {
             console.log(res.data.matches);
@@ -172,29 +177,6 @@ class CocktailInfo extends React.Component {
     }
 }
 
-
-
-// class Carousel extends React.Component{
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             image:props.image
-//         }
-//     }
-//     render() {
-//         return (
-//             <Flickity
-//                 className={'carousel'} // default '' 
-//                 elementType={'div'} // default 'div' 
-//                 /* options={flickityOptions} // takes flickity options {}  */
-//                 disableImagesLoaded={false} // default false 
-//             >
-//                     <img src={this.state.image} alt=""/>
-
-//             </Flickity>
-//         );
-//     }
-// };
 
 
 export default Gallery;
