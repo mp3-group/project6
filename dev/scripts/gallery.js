@@ -67,8 +67,9 @@ class Gallery extends React.Component {
                         <h2>Whiskey</h2>
                     </label>
                     <label>
-                        <input type="radio" value="irish" checked={this.state.selectedValue === 'irish'}/>
-                        <h2>Irish Cream</h2>
+
+                        <input type="radio" value="baileys" checked={this.state.selectedOption === 'baileys'}/>
+                        Irish Cream
                     </label>
                     <label>
                         <input type="radio" value="vodka" checked={this.state.selectedValue === 'vodka'}/>
@@ -101,12 +102,72 @@ class CocktailInfo extends React.Component {
             ingredients:props.ingredients,
             alcohol:props.alcohol
         }
-        // this.getCocktailRecipe = this.getCocktailRecipe.bind(this);
+
+        const result = this.calculateServings(0.75, 200, 1750);// TODO: make this dynamic and move this into render method
+        console.log(result);
+        this.getCocktailRecipe(this.props.cocktailId);// TODO: move this into render method
     }
+   
+   componentDidMount(liquor) {
+        axios({
+            method: 'GET',
+            url: 'http://proxy.hackeryou.com',
+            dataResponse: 'json',
+            paramsSerializer: function (params) {
+                return Qs.stringify(params, { arrayFormat: 'brackets' })
+            },
+            params: {
+                reqUrl: 'http://lcboapi.com/products?',
+                params: {
+                    _access_key: 'MDo2MWJkNGVlZS1kNDgxLTExZTctODVkNC05ZjYwOTU5N2ExMWU6TTZycmVONzJ4N1RrYWtQdXZCMml2OTFDNUpNa1lhbEpQVnNz',
+                    q: `${this.state.alcohol}`,
+                    per_page: 5
+                },
+            }
+        }).then((res) => {
+            
+            this.setState({
+                liquors: res.data.result
+            })
+            console.log(this.state.liquors);
+        })
+    }
+
+    getCocktailRecipe(cocktailId) {
+        axios.get(`http://api.yummly.com/v1/api/recipe/${cocktailId}`, {
+           params: {
+               _app_id: 'bd90db8c',
+               _app_key: '09d9084e61038c6296815d0591809343',
+            
+           }
+       }).then((res) => {
+           let recipeLines = res.data.ingredientLines;
+           console.log(recipeLines);
+           console.log(this.searchStringInArray( this.props.alcohol, recipeLines));// TODO: more to be done
+
+
+       })
+   }   
+
+    calculateServings(alcoholAmountCups,numberOfGuests,liquorAmountInMl) {
+
+        let numberOfBottlesNeeded = numberOfGuests / (liquorAmountInMl / (250 * alcoholAmountCups));
+        return Math.ceil(numberOfBottlesNeeded);
+    }
+
+    searchStringInArray(str, strArray) {
+        for (var j = 0; j < strArray.length; j++) {
+            if (strArray[j].match(str)) return j;
+        }
+        return -1;
+    }
+    
     render(){
         return(
             <div>
 
+                <p>commit</p>
+                <input type="text"/>
                 {this.state.ingredients}
                 {this.state.liquors.length > 0 ?
                 <Flickity
