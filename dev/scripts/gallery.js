@@ -82,7 +82,7 @@ class Gallery extends React.Component {
                         Whiskey
                     </label>
                     <label>
-                        <input type="radio" value="irish" checked={this.state.selectedOption === 'irish'}/>
+                        <input type="radio" value="baileys" checked={this.state.selectedOption === 'baileys'}/>
                         Irish Cream
                     </label>
                     <label>
@@ -96,7 +96,7 @@ class Gallery extends React.Component {
                     <li onClick={()=>this.getCocktailRecipe(cocktail.id)}  key={cocktail.id}>
                         {cocktail.recipeName}
                         <img src={cocktail.smallImageUrls[0].replace(/90$/,'500')} />
-                        {this.state.showCocktailID === cocktail.id ? <CocktailInfo alcohol={this.state.selectedValue} ingredients={cocktail.ingredients}/> : null}
+                        {this.state.showCocktailID === cocktail.id ? <CocktailInfo alcohol={this.state.selectedValue} ingredients={cocktail.ingredients} cocktailId={cocktail.id}/> : null}
                         
                     </li>
                     
@@ -115,7 +115,9 @@ class CocktailInfo extends React.Component {
             ingredients:props.ingredients,
             alcohol:props.alcohol
         }
-        
+        const result = this.calculateServings(0.75, 200, 1750);// TODO: make this dynamic and move this into render method
+        console.log(result);
+        this.getCocktailRecipe(this.props.cocktailId);// TODO: move this into render method
     }
    
    componentDidMount(liquor) {
@@ -143,6 +145,35 @@ class CocktailInfo extends React.Component {
             console.log(this.state.liquors);
         })
     }
+
+    getCocktailRecipe(cocktailId) {
+        axios.get(`http://api.yummly.com/v1/api/recipe/${cocktailId}`, {
+           params: {
+               _app_id: 'bd90db8c',
+               _app_key: '09d9084e61038c6296815d0591809343',
+            
+           }
+       }).then((res) => {
+           let recipeLines = res.data.ingredientLines;
+           console.log(recipeLines);
+           console.log(this.searchStringInArray( this.props.alcohol, recipeLines));// TODO: more to be done
+
+
+       })
+   }   
+
+    calculateServings(alcoholAmountCups,numberOfGuests,liquorAmountInMl) {
+
+        let numberOfBottlesNeeded = numberOfGuests / (liquorAmountInMl / (250 * alcoholAmountCups));
+        return Math.ceil(numberOfBottlesNeeded);
+    }
+
+    searchStringInArray(str, strArray) {
+        for (var j = 0; j < strArray.length; j++) {
+            if (strArray[j].match(str)) return j;
+        }
+        return -1;
+    }
     
     render(){
         const flickityOptions = {
@@ -155,6 +186,7 @@ class CocktailInfo extends React.Component {
         
         return(
             <div>
+                <input type="text"/>
                 {this.state.ingredients}
                 {this.state.liquors.length > 0 ?
                 <Flickity
@@ -167,6 +199,7 @@ class CocktailInfo extends React.Component {
                     <div key={liquor.id}>
                         <img src={liquor.image_thumb_url} /> 
                         <p>{liquor.name}</p>
+                        <p>{`$${liquor.price_in_cents * .01}`}</p>
                     </div>
                 )};
                     
