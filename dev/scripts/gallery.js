@@ -185,6 +185,7 @@ class CocktailInfo extends React.Component {
         
         return(
             <div>
+                <p>commit</p>
                 <input type="text"/>
                 {this.state.ingredients}
                 {this.state.liquors.length > 0 ?
