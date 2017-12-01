@@ -4,6 +4,9 @@ import Qs from 'qs';
 import flickity from 'flickity';
 import Flickity from 'react-flickity-component'
 import imagesLoaded from 'flickity-imagesloaded';
+
+
+
 class Gallery extends React.Component {
     constructor() {
         super();
@@ -11,10 +14,13 @@ class Gallery extends React.Component {
             cocktails: [],
             isToggleOn: false,
             showCocktailID: '',
-            selectedValue: ''
+            selectedValue: '',
+            showPopup: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.getCocktailRecipe = this.getCocktailRecipe.bind(this);
+        this.togglePopup = this.togglePopup.bind(this);
+                
 
     }
 
@@ -30,6 +36,9 @@ class Gallery extends React.Component {
                 attributes: {
                     course: "Cocktails"
                 },
+
+                q:`coffee ${alcohol}`
+
             }
         }).then((res) => {
             console.log(res.data.matches);
@@ -50,6 +59,7 @@ class Gallery extends React.Component {
     getLiqourBrand() {
 
     }
+
     handleChange(e) {
         this.setState({
             selectedValue: e.target.value
@@ -58,14 +68,16 @@ class Gallery extends React.Component {
         );
     }
 
-    render() {
+
+     render() {
         return (
             <div>
-                <form className="alcoholOption" value={this.state.selectedValue} onChange={this.handleChange}>
+                <form className="alcoholOption clearfix" value={this.state.selectedValue} onChange={this.handleChange}>
                     <label>
-                        <input type="radio" value="rum" checked={this.state.selectedOption === 'rum'} />
-                        Rum
+                        <input type="radio" value="rum" checked={this.state.selectedValue === 'rum'}/>
+                        <h2>Rum</h2>
                     </label>
+
                     <label>
                         <input type="radio" value="whiskey" checked={this.state.selectedOption === 'whiskey'} />
                         Whiskey
@@ -79,8 +91,9 @@ class Gallery extends React.Component {
                         Vodka
                     </label>
                 </form>
-                {this.state.cocktails.map(cocktail =>
-                    <li onClick={() => this.getCocktailRecipe(cocktail.id)} key={cocktail.id}>
+
+                {this.state.cocktails.map(cocktail => 
+                    <li onClick={()=>this.getCocktailRecipe(cocktail.id)}  key={cocktail.id}>
                         {cocktail.recipeName}
                         <img src={cocktail.smallImageUrls[0].replace(/90$/, '500')} />
                         {this.state.showCocktailID === cocktail.id ? <CocktailInfo alcohol={this.state.selectedValue} ingredients={cocktail.ingredients} cocktailId={cocktail.id} /> : null}
@@ -97,10 +110,13 @@ class CocktailInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            ingredients:props.ingredients,
+            alcohol:props.alcohol,
             liquors: [],
             ingredients: props.ingredients,
             alcohol: props.alcohol
         }
+
         const result = this.calculateServings(0.75, 200, 1750);// TODO: make this dynamic and move this into render method
         console.log(result);
         this.getCocktailRecipe(this.props.cocktailId);// TODO: move this into render method
@@ -162,9 +178,9 @@ class CocktailInfo extends React.Component {
             cellAlign: 'left',
             contain: true
         }
-
-        return (
+        return(
             <div>
+
                 <p>commit</p>
                 <input type="text" />
                 {this.state.ingredients}
@@ -187,5 +203,7 @@ class CocktailInfo extends React.Component {
             </div>
         )
     }
+
 }
+
 export default Gallery;

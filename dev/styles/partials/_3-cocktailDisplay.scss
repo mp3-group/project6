@@ -1,0 +1,61 @@
+/* ===== COCKTAIL DISPLAY ===== */
+
+.cocktailDisplay {
+    list-style: none;
+    clear: both;
+    width: 80%;
+    height: 80vh;
+    margin: 40px auto 0;
+    padding: 0;
+}
+
+.cocktailDisplay li {
+    width: calc(33.33% - 20px);
+    height: 250px;
+    margin: 5px;
+    float: left;
+    background: $fourthColour;
+    box-shadow: 0 0 3px $fourthColour;
+    position: relative;
+    h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: $thirdColour;
+        position: absolute;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+    }
+    img {
+        max-width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity .3s ease;
+        &:hover {
+            opacity: .5;
+        }
+    }
+}
+
+.popup {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0,0,0, 0.5);
+  }
+  .popup_inner {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 20%;
+    bottom: 20%;
+    margin: auto;
+    background: white;
+  }

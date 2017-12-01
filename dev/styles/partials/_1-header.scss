@@ -1,0 +1,63 @@
+/* HEADER */
+
+header {
+    text-align: center;
+    width: 100%;
+    max-width: 1500px;
+    height: 100vh;
+    background: linear-gradient(to bottom right, $thirdOverlay, $primaryOverlay, $secondaryOverlay), url(../../assets/hero.jpg) center;
+    background-size: cover;
+    position: relative;
+    .companyName {
+        .logo {
+            width: 100px;
+            float: left;   
+            display: block;         
+        }
+        h1{
+            text-align: left;
+            letter-spacing: 2px;
+            margin: 0;
+            padding-top: 20px;
+            font-family: $primaryFontStyle;
+            color: $thirdColour;
+            text-shadow: 0 2px 3px $fourthColour;
+            font-size: 4rem;
+        }
+        p {
+            margin: 0;
+            text-align: left;
+            font-size: 1.8rem;
+            color: $fourthColour;
+            font-weight: bold;
+            text-shadow: 0 1px 1px $primaryColour;
+        }
+    }
+}
+
+label[for='slideIn'] {
+    margin-top: 40px;
+    color: $fourthColour;
+    text-shadow: 0 1px 3px $secondaryColour;
+    font-size: 3rem;
+    letter-spacing: 1px;
+    z-index: 10;
+}
+
+#slideIn {
+    display: none;
+}
+
+#slideIn:checked ~ #page1 {
+    top: 30%;
+}
+
+
+
+
+
+
+
+
+
+
