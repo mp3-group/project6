@@ -1,5 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import Qs from 'qs';
+import flickity from 'flickity';
+import Flickity from 'react-flickity-component'
+import imagesLoaded from 'flickity-imagesloaded';
+
 
 class Gallery extends React.Component {
     constructor() {
@@ -23,7 +28,15 @@ class Gallery extends React.Component {
             params: {
                 _app_id: 'bd90db8c',
                 _app_key: '09d9084e61038c6296815d0591809343',
-                q:`coffee ${alcohol}`
+                q: 'coffee',
+                'allowedIngredient[]': alcohol,
+
+                'allowedCourse[]': 'course^course-Beverages',
+                
+                attributes: {
+                    course: "Cocktails"
+                },
+
             }
         }).then((res) => {
             console.log(res.data.matches);
@@ -53,6 +66,7 @@ class Gallery extends React.Component {
         );
     }
 
+
     togglePopup() {        
         this.setState({        
             showPopup: !this.state.showPopup        
@@ -60,6 +74,9 @@ class Gallery extends React.Component {
     }
 
      render() {
+
+    
+    render() {
         return (
             <div>
                 <form className="alcoholOption clearfix" value={this.state.selectedValue} onChange={this.handleChange}>
@@ -80,9 +97,22 @@ class Gallery extends React.Component {
                         <input type="radio" value="vodka" checked={this.state.selectedValue === 'vodka'}/>
                         <h2>Vodka</h2>
                     </label>
+
                 </form>               
                 <ul className="cocktailDisplay">
                     {this.state.cocktails.map(cocktail => 
+
+                </form>    
+
+                {this.state.cocktails.map(cocktail => 
+
+                    <li onClick={()=>this.getCocktailRecipe(cocktail.id)}  key={cocktail.id}>
+                        {cocktail.recipeName}
+                        <img src={cocktail.smallImageUrls[0].replace(/90$/,'500')} />
+                        {this.state.showCocktailID === cocktail.id ? <CocktailInfo alcohol={this.state.selectedValue} ingredients={cocktail.ingredients}/> : null}
+                        
+                    </li>
+
                     
                         <li onClick={()=>this.getCocktailRecipe(cocktail.id)}  key={cocktail.id}>
                             <h2 style={this.state.styles}>{cocktail.recipeName}</h2>
@@ -134,6 +164,71 @@ class Popup extends React.Component  {
         </div>        
         );        
     }
+
+            liquors: [],
+            ingredients:props.ingredients,
+            alcohol:props.alcohol
+        }
+        
+    }
+   
+   componentDidMount(liquor) {
+        axios({
+            method: 'GET',
+            url: 'http://proxy.hackeryou.com',
+            dataResponse: 'json',
+            paramsSerializer: function (params) {
+                return Qs.stringify(params, { arrayFormat: 'brackets' })
+            },
+            params: {
+                reqUrl: 'http://lcboapi.com/products?',
+                params: {
+                    _access_key: 'MDo2MWJkNGVlZS1kNDgxLTExZTctODVkNC05ZjYwOTU5N2ExMWU6TTZycmVONzJ4N1RrYWtQdXZCMml2OTFDNUpNa1lhbEpQVnNz',
+                    q: `${this.state.alcohol}`,
+                    per_page: 5
+                },
+            }
+        }).then((res) => {
+            
+            this.setState({
+                liquors: res.data.result
+            })
+            console.log(this.state.liquors);
+        })
+    }
+    
+    render(){
+        const flickityOptions = {
+            wrapAround: true,
+            imagesLoaded: true,
+            initialIndex: 0,
+            cellAlign: 'left',
+            contain: true
+        }
+        
+        return(
+            <div>
+                {this.state.ingredients}
+                {this.state.liquors.length > 0 ?
+                <Flickity
+                    className={'carousel'} 
+                    elementType={'div'}  
+                    options={flickityOptions} 
+                    imagesLoaded={true}  
+                >
+                {this.state.liquors.map(liquor => 
+                    <div key={liquor.id} className="liquorBottle">
+                        <img src={liquor.image_url} className="bottleImage"/> 
+                        <p className="liquorName">{liquor.name}</p>
+                    </div>
+                )};
+                    
+                </Flickity>
+                : null}
+            </div>
+        )
+    }
+
 }
 
 export default Gallery;
