@@ -19,7 +19,7 @@ class Gallery extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.getCocktailRecipe = this.getCocktailRecipe.bind(this);
-        this.togglePopup = this.togglePopup.bind(this);
+        // this.togglePopup = this.togglePopup.bind(this);
                 
 
     }
