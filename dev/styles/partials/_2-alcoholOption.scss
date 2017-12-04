@@ -2,9 +2,12 @@
     width: 100%;
     margin:0 auto;
     position: relative;
+    background: $fourthColour;
+    box-shadow: 0 0 20px $fourthColour;
+    transition: all .3s cubic-bezier(.5, .2, .2, 1.2);
     background: $secondaryColour;
     box-shadow: 0 -2px 5px $fourthColour;
-    
+
     label {
         &:hover {
             cursor: pointer;
@@ -45,7 +48,7 @@
     background-size: contain;
     background-position: 50%;
     div {
-        p {
+        p.introText {
             font-size: 2.5rem;
             margin: 40px auto;
             color: $secondaryColour;
