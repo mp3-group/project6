@@ -39,7 +39,7 @@ class HeroText extends React.Component {
         return(
             <div>
                 <h1>Coffee Cocktails</h1>
-                    <p className="introText">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita a consectetur voluptas eum eaque beatae repellendus quasi molestias, iusto vel harum odio ea praesentium asperiores aliquam exercitationem sapiente esse corporis.</p>  
+                    <p className="introText">Welcome to Moonbucks, your first choice for premium brand coffee. This holiday season, spice up your party by adding a specialty coffee cocktail to your menu. Simply select your choice of liquor, and find our handcrafted specialty cocktail recipes to choose from. Everyone loves coffee, so make this holiday party an event to remember.</p>  
             </div>
 
         )

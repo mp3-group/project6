@@ -29,13 +29,9 @@ class Gallery extends React.Component {
                 q: 'coffee',
                 'allowedIngredient[]': alcohol,
                 'allowedCourse[]': 'course^course-Beverages',
-
                 attributes: {
                     course: "Cocktails"
                 },
-
-                q: `coffee ${alcohol}`
-                
             }
         }).then((res) => {
             this.setState({
@@ -147,6 +143,7 @@ class CocktailInfo extends React.Component {
 
             }
         }).then((res) => {
+            console.log(res.data);
             this.setState({
                 recipe: res.data.ingredientLines
             })
@@ -171,8 +168,10 @@ class CocktailInfo extends React.Component {
                 },
             }
         }).then((res) => {
+            console.log(res.data.result);
             this.setState({
                 liquors: res.data.result
+               
             })
         });
     }
@@ -206,6 +205,9 @@ class CocktailInfo extends React.Component {
                             <div key={liquor.id} className="liquorBottle">
                                 <img src={liquor.image_url} className="bottleImage" />
                                 <p className="liquorName">{liquor.name}</p>
+                                <p className="liquorPrice">{`$${(liquor.price_in_cents * 0.01).toFixed(2)}`}</p>
+                                <p className="liquorMl">{`${liquor.package_unit_volume_in_milliliters
+} ml`}</p>
                             </div>
                         )};
                 </Flickity>
