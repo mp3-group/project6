@@ -12,13 +12,13 @@ class Gallery extends React.Component {
         super();
         this.state = {
             cocktails: [],
-            isToggleOn: false,
             showCocktailID: '',
             selectedValue: '',
             showPopup: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.setCocktailId = this.setCocktailId.bind(this);
+        this.togglePopup = this.togglePopup.bind(this);
     }
 
     getCocktails(alcohol) {
@@ -58,10 +58,17 @@ class Gallery extends React.Component {
         );
     }
 
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
+    }
+
     render() {
         return (
             <div>
                 <form className="alcoholOption clearfix" value={this.state.selectedValue} onChange={this.handleChange}>
+
                     <label>
                         <input type="radio" value="rum" checked={this.state.selectedValue === 'rum'} />
                         <h2>Rum</h2>
@@ -69,28 +76,49 @@ class Gallery extends React.Component {
 
                     <label>
                         <input type="radio" value="whiskey" checked={this.state.selectedOption === 'whiskey'} />
-                        Whiskey
+                        <h2>Whiskey</h2>
                     </label>
                     <label>
                         <input type="radio" value="baileys" checked={this.state.selectedOption === 'baileys'} />
-                        Irish Cream
+                        <h2> Irish Cream</h2>
                     </label>
                     <label>
                         <input type="radio" value="vodka" checked={this.state.selectedOption === 'vodka'} />
-                        Vodka
+                        <h2>Vodka</h2>
                     </label>
                 </form>
 
-                {this.state.cocktails.map(cocktail =>
-                    <li onClick={() => this.setCocktailId(cocktail.id)} key={cocktail.id}>
-                        {cocktail.recipeName}
-                        <img src={cocktail.smallImageUrls[0].replace(/90$/, '500')} />
-                        {this.state.showCocktailID === cocktail.id ? <CocktailInfo alcohol={this.state.selectedValue} cocktailId={cocktail.id} /> : null}
+                <ul className="cocktailDisplay">
 
-                    </li>
+                    {this.state.cocktails.map(cocktail =>
+                        <li onClick={() => this.setCocktailId(cocktail.id)} key={cocktail.id}>
+                            {/* <h2> {cocktail.recipeName}</h2> */}
+                            <button onClick={this.togglePopup}>Show Info<h2> {cocktail.recipeName}</h2></button>
+                            <img className="cocktailImage" src={cocktail.smallImageUrls[0].replace(/90$/, '500')} />
+                            {this.state.showCocktailID === cocktail.id &&
+                                this.state.showPopup ?
 
-                )}
+                                <Popup className="popUp"
+                                    cocktailInfo={<CocktailInfo alcohol={this.state.selectedValue}  cocktailId={cocktail.id} />}
+                                    closePopup={this.togglePopup.bind(this)}
+                                />
+                                : null}
+                        </li>
+                    )}
+                </ul>
+            </div>
+        );
+    }
+}
+class Popup extends React.Component {
 
+    render() {
+        return (
+            <div className='popup'>
+                <div className='popup_inner'>
+                    {this.props.cocktailInfo}
+                    <button onClick={this.props.closePopup}>Close</button>
+                </div>
             </div>
         );
     }
@@ -100,6 +128,7 @@ class CocktailInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            alcohol: props.alcohol,
             liquors: [],
             recipe: []
         }
@@ -125,7 +154,7 @@ class CocktailInfo extends React.Component {
         })
     }
 
-    getLiquors(){
+    getLiquors() {
         axios({
             method: 'GET',
             url: 'http://proxy.hackeryou.com',
@@ -158,12 +187,15 @@ class CocktailInfo extends React.Component {
         }
 
         return (
-            <div>
-                <h2>Recipe</h2>
-                {this.state.recipe.map((recipeLine, index) =>
-                    <p key={index}>{recipeLine}</p>
-                )}
-                {this.state.liquors.length > 0 ?
+            <div className="modal">
+                <div className="recipe">
+                    <h2>Recipe</h2>
+                    {this.state.recipe.map((recipeLine, index) =>
+                        <p key={index}>{recipeLine}</p>
+                    )}
+                </div>
+                {/* <div className="liquorImages"> */}
+                {this.state.liquors.length > 0 && this.state.recipe.length >0 ?
                     <Flickity
                         className={'carousel'}
                         elementType={'div'}
@@ -176,9 +208,9 @@ class CocktailInfo extends React.Component {
                                 <p className="liquorName">{liquor.name}</p>
                             </div>
                         )};
-
                 </Flickity>
                     : null}
+                {/* </div> */}
             </div>
         )
     }
