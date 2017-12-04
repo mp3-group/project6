@@ -86,14 +86,15 @@ class Gallery extends React.Component {
                         <h2>Vodka</h2>
                     </label>
                 </form>
+                    <p className="introText">Please select a Liquor to see delicious Coffee Cocktails</p>
 
                 <ul className="cocktailDisplay">
 
                     {this.state.cocktails.map(cocktail =>
                         <li onClick={() => this.setCocktailId(cocktail.id)} key={cocktail.id}>
-                            {/* <h2> {cocktail.recipeName}</h2> */}
-                            <button onClick={this.togglePopup}>Show Info<h2> {cocktail.recipeName}</h2></button>
+                            <button className="btnShowInfo" onClick={this.togglePopup}>Show Info</button>
                             <img className="cocktailImage" src={cocktail.smallImageUrls[0].replace(/90$/, '500')} />
+                            <h2> {cocktail.recipeName}</h2>
                             {this.state.showCocktailID === cocktail.id &&
                                 this.state.showPopup ?
 
