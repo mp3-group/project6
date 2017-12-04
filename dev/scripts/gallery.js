@@ -18,10 +18,7 @@ class Gallery extends React.Component {
             showPopup: false
         }
         this.handleChange = this.handleChange.bind(this);
-        this.getCocktailRecipe = this.getCocktailRecipe.bind(this);
-        // this.togglePopup = this.togglePopup.bind(this);
-                
-
+        this.setCocktailId = this.setCocktailId.bind(this);
     }
 
     getCocktails(alcohol) {
@@ -37,27 +34,19 @@ class Gallery extends React.Component {
                     course: "Cocktails"
                 },
 
-                q:`coffee ${alcohol}`
-
+                q: `coffee ${alcohol}`
             }
         }).then((res) => {
-            console.log(res.data.matches);
             this.setState({
                 cocktails: res.data.matches
             })
         })
     }
-    getCocktailRecipe(cocktail) {
-        // e.preventDefault();
 
+    setCocktailId(cocktailId) {
         this.setState(prevState => ({
-            showCocktailID: cocktail
-
+            showCocktailID: cocktailId
         }));
-
-    }
-    getLiqourBrand() {
-
     }
 
     handleChange(e) {
@@ -68,13 +57,12 @@ class Gallery extends React.Component {
         );
     }
 
-
-     render() {
+    render() {
         return (
             <div>
                 <form className="alcoholOption clearfix" value={this.state.selectedValue} onChange={this.handleChange}>
                     <label>
-                        <input type="radio" value="rum" checked={this.state.selectedValue === 'rum'}/>
+                        <input type="radio" value="rum" checked={this.state.selectedValue === 'rum'} />
                         <h2>Rum</h2>
                     </label>
 
@@ -92,11 +80,11 @@ class Gallery extends React.Component {
                     </label>
                 </form>
 
-                {this.state.cocktails.map(cocktail => 
-                    <li onClick={()=>this.getCocktailRecipe(cocktail.id)}  key={cocktail.id}>
+                {this.state.cocktails.map(cocktail =>
+                    <li onClick={() => this.setCocktailId(cocktail.id)} key={cocktail.id}>
                         {cocktail.recipeName}
                         <img src={cocktail.smallImageUrls[0].replace(/90$/, '500')} />
-                        {this.state.showCocktailID === cocktail.id ? <CocktailInfo alcohol={this.state.selectedValue} ingredients={cocktail.ingredients} cocktailId={cocktail.id} /> : null}
+                        {this.state.showCocktailID === cocktail.id ? <CocktailInfo alcohol={this.state.selectedValue} cocktailId={cocktail.id} /> : null}
 
                     </li>
 
@@ -106,23 +94,37 @@ class Gallery extends React.Component {
         );
     }
 }
+
 class CocktailInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ingredients:props.ingredients,
-            alcohol:props.alcohol,
             liquors: [],
-            ingredients: props.ingredients,
-            alcohol: props.alcohol
+            recipe: []
         }
-
-        const result = this.calculateServings(0.75, 200, 1750);// TODO: make this dynamic and move this into render method
-        console.log(result);
-        this.getCocktailRecipe(this.props.cocktailId);// TODO: move this into render method
     }
 
-    componentDidMount(liquor) {
+    componentDidMount() {
+        this.getCocktailRecipe();
+        this.getLiquors();
+    }
+
+    getCocktailRecipe() {
+        axios.get(`http://api.yummly.com/v1/api/recipe/${this.props.cocktailId}`, {
+            params: {
+                _app_id: 'bd90db8c',
+                _app_key: '09d9084e61038c6296815d0591809343',
+
+            }
+        }).then((res) => {
+            this.setState({
+                recipe: res.data.ingredientLines
+            })
+
+        })
+    }
+
+    getLiquors(){
         axios({
             method: 'GET',
             url: 'http://proxy.hackeryou.com',
@@ -134,40 +136,15 @@ class CocktailInfo extends React.Component {
                 reqUrl: 'http://lcboapi.com/products?',
                 params: {
                     _access_key: 'MDo2MWJkNGVlZS1kNDgxLTExZTctODVkNC05ZjYwOTU5N2ExMWU6TTZycmVONzJ4N1RrYWtQdXZCMml2OTFDNUpNa1lhbEpQVnNz',
-                    q: `${this.state.alcohol}`,
+                    q: `${this.props.alcohol}`,
                     per_page: 5
                 },
             }
         }).then((res) => {
-
             this.setState({
                 liquors: res.data.result
             })
-            console.log(this.state.liquors);
-        })
-    }
-    getCocktailRecipe(cocktailId) {
-        axios.get(`http://api.yummly.com/v1/api/recipe/${cocktailId}`, {
-            params: {
-                _app_id: 'bd90db8c',
-                _app_key: '09d9084e61038c6296815d0591809343',
-
-            }
-        }).then((res) => {
-            let recipeLines = res.data.ingredientLines;
-            console.log(recipeLines);
-            console.log(this.searchStringInArray(this.props.alcohol, recipeLines));// TODO: more to be done
-        })
-    }
-    calculateServings(alcoholAmountCups, numberOfGuests, liquorAmountInMl) {
-        let numberOfBottlesNeeded = numberOfGuests / (liquorAmountInMl / (250 * alcoholAmountCups));
-        return Math.ceil(numberOfBottlesNeeded);
-    }
-    searchStringInArray(str, strArray) {
-        for (var j = 0; j < strArray.length; j++) {
-            if (strArray[j].match(str)) return j;
-        }
-        return -1;
+        });
     }
 
     render() {
@@ -178,12 +155,13 @@ class CocktailInfo extends React.Component {
             cellAlign: 'left',
             contain: true
         }
-        return(
-            <div>
 
-                <p>commit</p>
-                <input type="text" />
-                {this.state.ingredients}
+        return (
+            <div>
+                <h2>Recipe</h2>
+                {this.state.recipe.map((recipeLine, index) =>
+                    <p key={index}>{recipeLine}</p>
+                )}
                 {this.state.liquors.length > 0 ?
                     <Flickity
                         className={'carousel'}
