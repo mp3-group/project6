@@ -3,10 +3,10 @@
     margin:0 auto;
     position: relative;
     background: $fourthColour;
-    box-shadow: 0 0 20px $fourthColour;
+    // box-shadow: 0 0 20px $fourthColour;
     transition: all .3s cubic-bezier(.5, .2, .2, 1.2);
     background: $secondaryColour;
-    box-shadow: 0 -2px 5px $fourthColour;
+    box-shadow: 0 -2px 20px $fourthColour;
 
     label {
         &:hover {
@@ -14,13 +14,12 @@
         }
         &:hover > h2 {
             color: $primaryColour;
-            text-shadow: 0 1px 3px $fourthColour;
         }
         h2 {
             font-family: $primaryFontStyle;
             font-size: 2.5rem;
             letter-spacing: 1px;
-            color: $secondaryColour;
+            color: $fourthColour;
             text-shadow: 0 0 .5px $thirdColour;
             display: inline-block;
             padding: 10px;
@@ -49,10 +48,9 @@
     background-position: 50%;
     div {
         p.introText {
-            font-size: 2.5rem;
-            margin: 40px auto;
-            color: $secondaryColour;
-            text-shadow: 0 1px 1px $thirdColour;
+            font-size: 2rem;
+            margin: 20px auto;
+            color: $thirdColour;
         }
     }
 }
