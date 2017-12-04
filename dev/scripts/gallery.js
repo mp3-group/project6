@@ -190,7 +190,7 @@ class CocktailInfo extends React.Component {
                 <div className="recipe">
                     <h2>Recipe</h2>
                     {this.state.recipe.map((recipeLine, index) =>
-                        <p key={index}>{recipeLine}</p>
+                        <p className="recipeLines" key={index}>{recipeLine}</p>
                     )}
                 </div>
                 {/* <div className="liquorImages"> */}
