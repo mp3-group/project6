@@ -35,6 +35,7 @@ class Gallery extends React.Component {
                 },
 
                 q: `coffee ${alcohol}`
+                
             }
         }).then((res) => {
             this.setState({
@@ -213,7 +214,6 @@ class CocktailInfo extends React.Component {
             </div>
         )
     }
-
 }
 
 export default Gallery;
