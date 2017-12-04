@@ -33,8 +33,6 @@ class Gallery extends React.Component {
                 attributes: {
                     course: "Cocktails"
                 },
-
-                q: `coffee ${alcohol}`
             }
         }).then((res) => {
             this.setState({
@@ -92,7 +90,8 @@ class Gallery extends React.Component {
                     {this.state.cocktails.map(cocktail =>
                         <li onClick={() => this.setCocktailId(cocktail.id)} key={cocktail.id}>
                             {/* <h2> {cocktail.recipeName}</h2> */}
-                            <button onClick={this.togglePopup}>Show Info<h2> {cocktail.recipeName}</h2></button>
+                            <h2> {cocktail.recipeName}</h2>
+                            <button onClick={this.togglePopup}>Show Info</button>
                             <img className="cocktailImage" src={cocktail.smallImageUrls[0].replace(/90$/, '500')} />
                             {this.state.showCocktailID === cocktail.id &&
                                 this.state.showPopup ?
@@ -166,7 +165,7 @@ class CocktailInfo extends React.Component {
                 params: {
                     _access_key: 'MDo2MWJkNGVlZS1kNDgxLTExZTctODVkNC05ZjYwOTU5N2ExMWU6TTZycmVONzJ4N1RrYWtQdXZCMml2OTFDNUpNa1lhbEpQVnNz',
                     q: `${this.props.alcohol}`,
-                    per_page: 5
+                    per_page: 10
                 },
             }
         }).then((res) => {
@@ -199,14 +198,22 @@ class CocktailInfo extends React.Component {
                         className={'carousel'}
                         elementType={'div'}
                         options={flickityOptions}
-                        imagesLoaded={true}
-                    >
-                        {this.state.liquors.map(liquor =>
-                            <div key={liquor.id} className="liquorBottle">
+                        imagesLoaded={true}>
+                        {this.state.liquors.map(liquor => {
+                            const liquorNameLink = liquor.name;
+                            const linkNoApostrophe = liquorNameLink.replace("'", "");
+                            const link = linkNoApostrophe.replace(/\s+/g, '-')
+                            console.log(link, liquor.id);
+
+                            return (<div key={liquor.id} className="liquorBottle">
                                 <img src={liquor.image_url} className="bottleImage" />
                                 <p className="liquorName">{liquor.name}</p>
-                            </div>
-                        )};
+                                <p className="liquorPrice">{`$${liquor.price_in_cents * 0.01}`}</p>
+                                <p className="liquorMl">{`${liquor.package_unit_volume_in_milliliters
+                                    } ml`}</p>
+                                {<a style={{ display: "table-cell" }} href= {`http://www.lcbo.com/lcbo/product/${link}/${liquor.id}`} target="_blank">Purchase</a>} 
+                            </div>) 
+                        })};
                 </Flickity>
                     : null}
                 {/* </div> */}
