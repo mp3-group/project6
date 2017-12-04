@@ -2,9 +2,15 @@
     width: 100%;
     margin:0 auto;
     position: relative;
+<<<<<<< HEAD
     background: $fourthColour;
     box-shadow: 0 0 20px $fourthColour;
     transition: all .3s cubic-bezier(.5, .2, .2, 1.2);
+=======
+    background: $secondaryColour;
+    box-shadow: 0 -2px 5px $fourthColour;
+    
+>>>>>>> 265b97274b88fcacf62461482f813fa8087e82f6
     label {
         &:hover {
             cursor: pointer;

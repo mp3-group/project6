@@ -3,6 +3,7 @@
 header {
     text-align: center;
     width: 100%;
+    // max-width: 1500px;
     height: 100vh;
     background: linear-gradient(to bottom right, $thirdOverlay, $primaryOverlay, $secondaryOverlay), url(../../assets/hero.jpg) center;
     background-size: cover;
