@@ -2,19 +2,27 @@
     width: 100%;
     margin:0 auto;
     position: relative;
-    background: $secondaryColour;
-    box-shadow: 0 -2px 5px $fourthColour;
-    z-index: 50;
+    background: $fourthColour;
+    box-shadow: 0 0 20px $fourthColour;
+    transition: all .3s cubic-bezier(.5, .2, .2, 1.2);
     label {
         &:hover {
             cursor: pointer;
         }
+        &:hover > h2 {
+            color: $primaryColour;
+            text-shadow: 0 1px 3px $fourthColour;
+        }
         h2 {
             font-family: $primaryFontStyle;
-            font-size: 2rem;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            color: $secondaryColour;
+            text-shadow: 0 0 .5px $thirdColour;
             display: inline-block;
             padding: 10px;
             margin: 0 10px;
+            transition: all .3s cubic-bezier(.5, .2, .2, 1.2);
         }
         &:last-child {
             margin-right: 0;
@@ -32,8 +40,18 @@
     left: 0;
     width: 100%;
     overflow-y: scroll;
-    transition: all .5s ease;
-    background: $fourthColour;
+    transition: all .5s cubic-bezier(.5, .2, .2, 1.2);
+    background: linear-gradient($secondaryOverlay, $secondaryOverlay), url(../../assets/coffeeBean1.png) bottom no-repeat;
+    background-size: contain;
+    background-position: 50%;
+    div {
+        p {
+            font-size: 2.5rem;
+            margin: 40px auto;
+            color: $secondaryColour;
+            text-shadow: 0 1px 1px $thirdColour;
+        }
+    }
 }
 
 

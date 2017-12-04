@@ -3,15 +3,18 @@
 header {
     text-align: center;
     width: 100%;
-    max-width: 1500px;
     height: 100vh;
     background: linear-gradient(to bottom right, $thirdOverlay, $primaryOverlay, $secondaryOverlay), url(../../assets/hero.jpg) center;
     background-size: cover;
     position: relative;
+    overflow: hidden;
     .companyName {
+        background: linear-gradient(to top, $thirdOverlay -10%, $primaryOverlay 90%);
+        box-shadow: 0 .5px 5px $fourthColour;
         .logo {
             width: 100px;
             float: left;   
+            margin: 10px 0 0 20px;
             display: block;         
         }
         h1{
@@ -21,27 +24,56 @@ header {
             padding-top: 20px;
             font-family: $primaryFontStyle;
             color: $thirdColour;
-            text-shadow: 0 2px 3px $fourthColour;
-            font-size: 4rem;
+            text-shadow: 1px 3px 10px $fourthColour;
+            font-size: 3.5rem;
         }
         p {
             margin: 0;
+            padding-bottom: 30px;
             text-align: left;
             font-size: 1.8rem;
             color: $fourthColour;
             font-weight: bold;
-            text-shadow: 0 1px 1px $primaryColour;
+            text-shadow: -1px 3px 10px $thirdColour;
         }
     }
 }
 
+.hero{
+    div {
+        color: $thirdColour;
+        text-shadow: 1px 3px 10px $fourthColour;
+        h1{
+            font-size: 5rem;
+            font-family: $primaryFontStyle;
+        }
+        p {
+            font-size: 2rem;
+            font-family: $secondaryFontStyle;
+        }
+    }
+}
+
+
 label[for='slideIn'] {
-    margin-top: 40px;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
     color: $fourthColour;
-    text-shadow: 0 1px 3px $secondaryColour;
+    text-shadow: 0 0px 1px $thirdColour;
     font-size: 3rem;
-    letter-spacing: 1px;
-    z-index: 10;
+    font-weight: bold;
+    transition: all .5s cubic-bezier(.5, .2, .2, 1.2);
+    &:hover {
+        top: 87%;
+        text-shadow: 0 0px 8px $thirdColour;
+
+    }
+    img {
+        max-width: 100%;
+    }
 }
 
 #slideIn {
@@ -49,7 +81,10 @@ label[for='slideIn'] {
 }
 
 #slideIn:checked ~ #page1 {
-    top: 30%;
+    top: 18%;
+}
+#slideIn:checked ~ label[for='slideIn'] {
+    top: 10%;
 }
 
 

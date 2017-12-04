@@ -14,8 +14,6 @@ class Gallery extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.getCocktailRecipe = this.getCocktailRecipe.bind(this);
-        this.togglePopup = this.togglePopup.bind(this);
-                
 
     }
    
@@ -40,8 +38,7 @@ class Gallery extends React.Component {
         this.setState(prevState => ({
             showCocktailID: cocktail
             
-        }));
-     
+        }));     
     }
 
     handleChange(e) {
@@ -67,25 +64,26 @@ class Gallery extends React.Component {
                         <h2>Whiskey</h2>
                     </label>
                     <label>
-
                         <input type="radio" value="baileys" checked={this.state.selectedOption === 'baileys'}/>
-                        Irish Cream
+                        <h2>Irish Cream</h2>
                     </label>
                     <label>
                         <input type="radio" value="vodka" checked={this.state.selectedValue === 'vodka'}/>
                         <h2>Vodka</h2>
                     </label>
                 </form>               
-                
-                {this.state.cocktails.map(cocktail => 
+                <p>Please select a Liquor to see delicious Coffee Cocktails</p>
+                <ul className="cocktailDisplay">
+                    {this.state.cocktails.map(cocktail => 
                     <li onClick={()=>this.getCocktailRecipe(cocktail.id)}  key={cocktail.id}>
-                        {cocktail.recipeName}
-                        <img src={cocktail.smallImageUrls[0].replace(/90$/,'500')} />
+                        <img className="cocktailImage"  src={cocktail.smallImageUrls[0].replace(/90$/,'500')} />
+                        <h2>{cocktail.recipeName}</h2>
+
                         {this.state.showCocktailID === cocktail.id ? <CocktailInfo alcohol={this.state.selectedValue} ingredients={cocktail.ingredients} cocktailId={cocktail.id}/> : null}
                         
-                    </li>
-                    
+                    </li>               
                 )}
+                </ul>
             
             </div>
         );
@@ -165,7 +163,6 @@ class CocktailInfo extends React.Component {
     render(){
         return(
             <div>
-
                 <p>commit</p>
                 <input type="text"/>
                 {this.state.ingredients}
@@ -188,6 +185,5 @@ class CocktailInfo extends React.Component {
             </div>
         )
     }
-
-
+}
 export default Gallery;

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Gallery from './gallery.js';
+import CompanyLogo from './CompanyLogo';
+import HeroDisplay from './HeroDisplay';
 
 // pseudo code:
 
@@ -21,22 +22,13 @@ import Gallery from './gallery.js';
 
 class App extends React.Component {
 
+
     render() {
       return (
         <div>
             <header>
-              <div className='wrapper companyName'>
-                <img className='logo' src="assets/coffeeBeanLean.png" alt="company logo of a coffee bean"/>
-                <h1>moondollars</h1>
-                <p>premium coffee</p>
-              </div>
-                <input type="checkbox" id='slideIn'/>
-                <label htmlFor="slideIn">click</label>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita a consectetur voluptas eum eaque beatae repellendus quasi molestias, iusto vel harum odio ea praesentium asperiores aliquam exercitationem sapiente esse corporis.</p>
-              <div id="page1">
-                  <Gallery />
-              {/* <CocktailInfo /> */}
-              </div>
+              <CompanyLogo />
+              <HeroDisplay />
             </header>
         </div>
       )
