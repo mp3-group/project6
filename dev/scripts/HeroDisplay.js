@@ -39,7 +39,7 @@ class HeroText extends React.Component {
         return(
             <div>
                 <h1>Coffee Cocktails</h1>
-                    <p >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita a consectetur voluptas eum eaque beatae repellendus quasi molestias, iusto vel harum odio ea praesentium asperiores aliquam exercitationem sapiente esse corporis.</p>  
+                    <p className="introText">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita a consectetur voluptas eum eaque beatae repellendus quasi molestias, iusto vel harum odio ea praesentium asperiores aliquam exercitationem sapiente esse corporis.</p>  
             </div>
 
         )
