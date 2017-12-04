@@ -6,22 +6,18 @@ import Flickity from 'react-flickity-component'
 import imagesLoaded from 'flickity-imagesloaded';
 
 
-
 class Gallery extends React.Component {
     constructor() {
         super();
         this.state = {
             cocktails: [],
-            isToggleOn: false,
             showCocktailID: '',
             selectedValue: '',
-            showPopup: false
+            showPopUp: false,
         }
         this.handleChange = this.handleChange.bind(this);
         this.getCocktailRecipe = this.getCocktailRecipe.bind(this);
         this.togglePopup = this.togglePopup.bind(this);
-                
-
     }
 
     getCocktails(alcohol) {
@@ -50,15 +46,13 @@ class Gallery extends React.Component {
     getCocktailRecipe(cocktail) {
         // e.preventDefault();
 
-        this.setState(prevState => ({
+        this.setState({
             showCocktailID: cocktail
 
-        }));
+        });
 
     }
-    getLiqourBrand() {
 
-    }
 
     handleChange(e) {
         this.setState({
@@ -68,11 +62,16 @@ class Gallery extends React.Component {
         );
     }
 
-
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
+    }
      render() {
         return (
             <div>
                 <form className="alcoholOption clearfix" value={this.state.selectedValue} onChange={this.handleChange}>
+
                     <label>
                         <input type="radio" value="rum" checked={this.state.selectedValue === 'rum'}/>
                         <h2>Rum</h2>
@@ -80,28 +79,51 @@ class Gallery extends React.Component {
 
                     <label>
                         <input type="radio" value="whiskey" checked={this.state.selectedOption === 'whiskey'} />
-                        Whiskey
+                        <h2>Whiskey</h2>
                     </label>
                     <label>
                         <input type="radio" value="baileys" checked={this.state.selectedOption === 'baileys'} />
-                        Irish Cream
+                        <h2> Irish Cream</h2>
                     </label>
                     <label>
                         <input type="radio" value="vodka" checked={this.state.selectedOption === 'vodka'} />
-                        Vodka
+                        <h2>Vodka</h2>
                     </label>
                 </form>
 
-                {this.state.cocktails.map(cocktail => 
-                    <li onClick={()=>this.getCocktailRecipe(cocktail.id)}  key={cocktail.id}>
-                        {cocktail.recipeName}
-                        <img src={cocktail.smallImageUrls[0].replace(/90$/, '500')} />
-                        {this.state.showCocktailID === cocktail.id ? <CocktailInfo alcohol={this.state.selectedValue} ingredients={cocktail.ingredients} cocktailId={cocktail.id} /> : null}
+                <ul className="cocktailDisplay">
+                   
+                    {this.state.cocktails.map(cocktail =>
+                        <li onClick={() => this.getCocktailRecipe(cocktail.id)} key={cocktail.id}>
+                        {/* <h2> {cocktail.recipeName}</h2> */}
+                        <button onClick={this.togglePopup}><h2> {cocktail.recipeName}</h2></button>
+                            <img className="cocktailImage" src={cocktail.smallImageUrls[0].replace(/90$/, '500')} />
+                            {this.state.showCocktailID === cocktail.id &&
+                            this.state.showPopup ?
+                                
+                                <Popup className="popUp"
 
-                    </li>
+                                    cocktailInfo={<CocktailInfo alcohol={this.state.selectedValue} ingredients={cocktail.ingredients} cocktailId={cocktail.id} />}
 
-                )}
-
+                                    closePopup={this.togglePopup.bind(this)}
+                                />
+                                : null}
+                        </li>
+                    )}
+                </ul>
+            </div>
+        );
+    }
+}
+class Popup extends React.Component {
+   
+    render() {
+        return (
+            <div className='popup'>
+                <div className='popup_inner'>
+                    {this.props.cocktailInfo}
+                    <button onClick={this.props.closePopup}>Close</button>
+                </div>
             </div>
         );
     }
@@ -113,8 +135,6 @@ class CocktailInfo extends React.Component {
             ingredients:props.ingredients,
             alcohol:props.alcohol,
             liquors: [],
-            ingredients: props.ingredients,
-            alcohol: props.alcohol
         }
 
         const result = this.calculateServings(0.75, 200, 1750);// TODO: make this dynamic and move this into render method
@@ -181,7 +201,7 @@ class CocktailInfo extends React.Component {
         return(
             <div>
 
-                <p>commit</p>
+                {/* <p>commit</p> */}
                 <input type="text" />
                 {this.state.ingredients}
                 {this.state.liquors.length > 0 ?
@@ -203,7 +223,6 @@ class CocktailInfo extends React.Component {
             </div>
         )
     }
-
 }
 
 export default Gallery;
