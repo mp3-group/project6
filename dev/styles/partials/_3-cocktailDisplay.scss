@@ -27,8 +27,11 @@
         font-size: 1.5rem;
         font-weight: bold;
         width: 100%;
+        margin: 0;
+        padding: 5px 0;
         background: $primaryColour;
         color: $thirdColour;
+        box-shadow: 0 -1px 3px $fourthColour;
         text-transform: uppercase;
         border: none;
         position: absolute;
@@ -36,6 +39,7 @@
         left: 50%;
         transform: translateX(-50%);
         z-index: 5;
+        transition: color .3 ease;
         &:hover {
             color: $secondaryColour;
         }
