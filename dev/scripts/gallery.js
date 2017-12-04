@@ -44,7 +44,6 @@ class Gallery extends React.Component {
         })
     }
     getCocktailRecipe(cocktail) {
-        // e.preventDefault();
 
         this.setState({
             showCocktailID: cocktail
@@ -215,6 +214,7 @@ class CocktailInfo extends React.Component {
                             <div key={liquor.id} className="liquorBottle">
                                 <img src={liquor.image_url} className="bottleImage" />
                                 <p className="liquorName">{liquor.name}</p>
+                                
                             </div>
                         )};
 
