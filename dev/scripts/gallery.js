@@ -228,17 +228,17 @@ class CocktailInfo extends React.Component {
                                 const link = linkNoApostrophe.replace(/\s+/g, '-')
 
                                 return (<div key={liquor.id} className="liquorBottle">
-                                    <p className="liquorName">{liquor.name}</p>
+                                    <h2 className="liquorName">{liquor.name}</h2>
                                     <img src={liquor.image_url} className="bottleImage" />
                                     <p className="liquorPrice">{`$${liquor.price_in_cents * 0.01}`}</p>
                                     <p className="liquorMl">{`${liquor.package_unit_volume_in_milliliters
                                         } ml`}</p>
-                                    {<a href= {`http://www.lcbo.com/lcbo/product/${link}/${liquor.id}`} target="_blank">Purchase this item</a>} 
+                                    {<a href= {`http://www.lcbo.com/lcbo/product/${link}/${liquor.id}`} target="_blank">Purchase this bottle</a>} 
                                 </div>) 
                             })}
                         </Flickity>
                         : null}
-                    <button className="viewBtn" onClick={this.flip}>VIEW RECIPE</button>
+                    <button className="viewBtn" onClick={this.flip}>VIEW COCKTAIL RECIPE</button>
                     </div>
                 </div>
             </div>
