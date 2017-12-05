@@ -22,7 +22,7 @@ class HeroDisplay extends React.Component {
             <div className="hero">
                 <input type="checkbox" id='slideIn' onChange={this.handleHeroFade}/>
                 <label htmlFor="slideIn"><i className="fa fa-glass" aria-hidden="true"></i></label>
-                <p className="glassIcon">Click Glass and Make Your Selection</p>
+                <p className="glassIcon">Click Glass to Begin Your Selection</p>
                 {this.state.show === true ? <HeroText /> : null}
                 <div id="page1">
                   <Gallery />

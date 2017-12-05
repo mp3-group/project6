@@ -37,7 +37,7 @@ class Gallery extends React.Component {
         }).then((res) => {
             console.log(res.data);
             this.setState({
-                cocktails: res.data.matches
+                cocktails: res.data.matches.splice(0,9)
             })
         })
     }
