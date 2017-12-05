@@ -1,26 +1,47 @@
 
-    // display: flex;
-    .recipe, .liquor  {
-        width: 70%;
-        margin: 0 auto;
-        height: 750px;
-        margin-top: 50px;
-        background:white;
-        border-radius: 10px;
-        opacity: 1;
+.popup {
+    position: fixed;
+    z-index: 30;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0,0,0, 0.5);
+}
+.popup_inner {
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    top: 5%;
+    bottom: 5%;
+    margin: auto;
+    background: transparent;
+    // border: 1px solid red;
     }
+.recipe, .liquor  {
+    width: 70%;
+    margin: 0 auto;
+    height: 650px;
+    margin-top: 50px;
+    background:white;
+    border-radius: 10px;
+    opacity: 1;
+}
 
 h2.recipeTitle{
         font-family: $primaryFontStyle;
         letter-spacing: 1px;
         font-size:2.8rem;
         color: $primaryColour;
-        padding: 60px 25px 40px 25px;
-        // margin-bottom: 60px;
+        padding: 40px 25px 40px 25px;
     }
 h2.liquorName {
     @extend h2.recipeTitle;
-    padding: 0px;
+    padding: 0;
+    margin-bottom:0;
     font-size: 2.2rem;
 
 }
@@ -49,9 +70,6 @@ $degree: 90deg;
   display: inline-block;
   width: 50%;
 
-
-
-  
   .Card-Front,
   .Card-Back {
     position: absolute;
@@ -60,7 +78,7 @@ $degree: 90deg;
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    height: 850px;
+    height: 750px;
     border-radius: 10px;
     background: linear-gradient(to bottom right, lighten($thirdOverlay, 85%), lighten($primaryOverlay, 85%), lighten($secondaryOverlay, 85%)), url(../../assets/hero.jpg) center;
     background-size: cover;
@@ -72,9 +90,9 @@ $degree: 90deg;
         font-family: $secondaryFontStyle;
         text-align: center;
         text-decoration: none;
-        padding: 0 50px;
-        line-height: 1.8;
-        &.liquorPrice {
+        padding: 0 20px;
+        line-height: 1.4;
+        span.liquorPrice {
             font-weight: bolder;
         }
     }
@@ -84,7 +102,7 @@ $degree: 90deg;
         font-family: $secondaryFontStyle;
         color:$primaryColour;
         text-align: center;
-        padding: 5px;
+        // padding: 5px;
         margin: 10px auto;
         &:hover {
             color: lighten($primaryColour,30%);
@@ -93,15 +111,15 @@ $degree: 90deg;
 
     }
   .viewBtn {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold;
     position:absolute;  
-    bottom: 100px;
+    bottom: 40px;
     left: 50%;
     right: 50%;
     transform: translateX(-50%);
-    width: 200px;
-    padding: 5px 0;
+    width: 70%;
+    padding: 10px;
     background: $primaryColour;
     color: $thirdColour;
     box-shadow: 0 -1px 3px $fourthColour;
