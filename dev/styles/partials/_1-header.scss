@@ -119,7 +119,8 @@ label[for='slideIn'] {
     font-size: 15px;
     position: absolute;
     top: 95%;
-    left: 43%;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: $secondaryFontStyle;
 
 }
