@@ -5,7 +5,7 @@ header {
     width: 100%;
     // max-width: 1500px;
     height: 100vh;
-    background: linear-gradient(to bottom right, $thirdOverlay, $primaryOverlay, $secondaryOverlay), url(../../assets/hero.jpg) center;
+    background: linear-gradient(to bottom right, $thirdOverlay, $primaryOverlay, $secondaryOverlay), url(../../public/assets/hero.jpg) center;
     background-size: cover;
     position: relative;
     overflow: hidden;
@@ -58,7 +58,7 @@ header {
             display: block;
             width: 70%;
             margin: 80px auto;
-            font-size: 2.8rem;
+            font-size: 2rem;
             word-spacing: 1.5px;
             line-height: 3.5rem;
             font-family: $secondaryFontStyle;

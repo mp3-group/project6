@@ -83,7 +83,7 @@ $degree: 90deg;
     text-align: center;
     height: 750px;
     border-radius: 10px;
-    background: linear-gradient(to bottom right, lighten($thirdOverlay, 85%), lighten($primaryOverlay, 85%), lighten($secondaryOverlay, 85%)), url(../../assets/hero.jpg) center;
+    background: linear-gradient(to bottom right, lighten($thirdOverlay, 85%), lighten($primaryOverlay, 85%), lighten($secondaryOverlay, 85%)), url(../../public/assets/hero.jpg) center;
     background-size: cover;
     background-repeat:no-repeat;
     // margin-bottom: -$card-size / 2;
