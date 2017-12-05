@@ -24,7 +24,7 @@
 .recipe, .liquor  {
     width: 70%;
     margin: 0 auto;
-    height: 70vh;
+    height: 650px;
     margin-top: 50px;
     background:white;
     border-radius: 10px;
@@ -78,7 +78,7 @@ $degree: 90deg;
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    height: 80vh;
+    height: 750px;
     border-radius: 10px;
     background: linear-gradient(to bottom right, lighten($thirdOverlay, 85%), lighten($primaryOverlay, 85%), lighten($secondaryOverlay, 85%)), url(../../assets/hero.jpg) center;
     background-size: cover;
