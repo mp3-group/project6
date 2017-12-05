@@ -30,6 +30,9 @@
     border-radius: 10px;
     opacity: 1;
 }
+.recipe {
+  overflow: scroll;
+}
 
 h2.recipeTitle{
         font-family: $primaryFontStyle;
@@ -104,6 +107,8 @@ $degree: 90deg;
         text-align: center;
         // padding: 5px;
         margin: 10px auto;
+        position: relative;
+        top:80px;
         &:hover {
             color: lighten($primaryColour,30%);
             text-decoration: none;
