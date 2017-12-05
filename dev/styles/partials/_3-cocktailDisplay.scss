@@ -35,6 +35,9 @@
     box-shadow: 0 0 3px $fourthColour;
     // z-index: 10;
     position: relative;
+    &:nth-child(3n + 0) {
+        margin-right: 0;
+    }
     /* Portrait tablet and small desktops */
     @media (max-width: 940px) {
         width: calc(33.33% - 10px)
@@ -42,9 +45,18 @@
     /* Landscape phone to portrait tablet */
     @media (max-width: 768px) {
         top: 20%;
+        width: calc(50% - 20px);
+        &:nth-child(3n + 0) {
+            margin-right: 10px;
+        }
+        &:nth-child(2n + 0) {
+            margin-right: 0px;
+        }   
     }
-    &:nth-child(3n + 0) {
-        margin-right: 0;
+    /* Landscape phones and down */
+    @media (max-width: 480px) {
+        width: 100%;
+        margin: 10px 0;
     }
     .btnShowInfo {
         font-size: 1.5rem;
