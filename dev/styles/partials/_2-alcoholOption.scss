@@ -25,6 +25,10 @@
             padding: 10px;
             margin: 0 10px;
             transition: all .3s cubic-bezier(.5, .2, .2, 1.2);
+            /* Landscape phones and down */
+            @media (max-width: 480px) {
+                display: block;
+            }
         }
         &:last-child {
             margin-right: 0;
@@ -50,7 +54,19 @@
         p.introText {
             font-size: 2rem;
             margin: 20px auto;
-            color: $thirdColour;
+            color: $thirdColour;/* Portrait tablet and small desktops */
+            @media (max-width: 940px) {
+            }
+            
+            /* Landscape phone to portrait tablet */
+            @media (max-width: 768px) {
+            }
+            
+            /* Landscape phones and down */
+            @media (max-width: 480px) {
+                font-size: 2.5rem;
+                margin: 10px auto 0;
+            }
         }
     }
 }
