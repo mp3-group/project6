@@ -32,10 +32,12 @@ class Gallery extends React.Component {
                 attributes: {
                     course: "Cocktails"
                 },
+                per_page:9
             }
         }).then((res) => {
+            console.log(res.data);
             this.setState({
-                cocktails: res.data.matches
+                cocktails: res.data.matches.splice(0,9)
             })
         })
     }
