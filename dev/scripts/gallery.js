@@ -6,7 +6,6 @@ import Flickity from 'react-flickity-component'
 import imagesLoaded from 'flickity-imagesloaded';
 
 
-
 class Gallery extends React.Component {
     constructor() {
         super();
@@ -15,6 +14,7 @@ class Gallery extends React.Component {
             showCocktailID: '',
             selectedValue: '',
             showPopup: false
+            
         }
         this.handleChange = this.handleChange.bind(this);
         this.setCocktailId = this.setCocktailId.bind(this);
@@ -62,6 +62,7 @@ class Gallery extends React.Component {
         });
     }
 
+
     render() {
         return (
             <div>
@@ -69,20 +70,20 @@ class Gallery extends React.Component {
 
                     <label>
                         <input type="radio" value="rum" checked={this.state.selectedValue === 'rum'} />
-                        <h2>Rum</h2>
+                        <h2 className="liquorTitle">Rum</h2>
                     </label>
 
                     <label>
                         <input type="radio" value="whiskey" checked={this.state.selectedOption === 'whiskey'} />
-                        <h2>Whiskey</h2>
+                        <h2 className="liquorTitle">Whiskey</h2>
                     </label>
                     <label>
                         <input type="radio" value="baileys" checked={this.state.selectedOption === 'baileys'} />
-                        <h2> Irish Cream</h2>
+                        <h2 className="liquorTitle"> Irish Cream</h2>
                     </label>
                     <label>
                         <input type="radio" value="vodka" checked={this.state.selectedOption === 'vodka'} />
-                        <h2>Vodka</h2>
+                        <h2 className="liquorTitle">Vodka</h2>
                     </label>
                 </form>
                     <p className="introText">Please select a Liquor to see delicious Coffee Cocktails</p>
@@ -91,14 +92,14 @@ class Gallery extends React.Component {
 
                     {this.state.cocktails.map(cocktail =>
                         <li onClick={() => this.setCocktailId(cocktail.id)} key={cocktail.id}>
-                            <button className="btnShowInfo" onClick={this.togglePopup}>Show Info</button>
+                            <button className="btnShowInfo" onClick={this.togglePopup}>VIEW RECIPE</button>
                             <img className="cocktailImage" src={cocktail.smallImageUrls[0].replace(/90$/, '500')} />
-                            <h2> {cocktail.recipeName}</h2>
+                            <h2 className="cocktailName"> {cocktail.recipeName}</h2>
                             {this.state.showCocktailID === cocktail.id &&
                                 this.state.showPopup ?
 
                                 <Popup className="popUp"
-                                    cocktailInfo={<CocktailInfo alcohol={this.state.selectedValue}  cocktailId={cocktail.id} />}
+                                    cocktailInfo={<CocktailInfo alcohol={this.state.selectedValue}  cocktailName={cocktail.recipeName} cocktailId={cocktail.id} />}
                                     closePopup={this.togglePopup.bind(this)}
                                 />
                                 : null}
@@ -112,11 +113,12 @@ class Gallery extends React.Component {
 class Popup extends React.Component {
 
     render() {
+        
         return (
             <div className='popup'>
                 <div className='popup_inner'>
                     {this.props.cocktailInfo}
-                    <button onClick={this.props.closePopup}>Close</button>
+                    <button className="closeBtn"onClick={this.props.closePopup}><i class="fa fa-times-circle" aria-hidden="true"></i></button>
                 </div>
             </div>
         );
@@ -127,10 +129,14 @@ class CocktailInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            cocktailName: props.cocktailName,
             alcohol: props.alcohol,
             liquors: [],
-            recipe: []
+            recipe: [],
+            flipped: false,
+            clicked: false
         }
+        this.flip = this.flip.bind(this);
     }
 
     componentDidMount() {
@@ -167,7 +173,7 @@ class CocktailInfo extends React.Component {
                 params: {
                     _access_key: 'MDo2MWJkNGVlZS1kNDgxLTExZTctODVkNC05ZjYwOTU5N2ExMWU6TTZycmVONzJ4N1RrYWtQdXZCMml2OTFDNUpNa1lhbEpQVnNz',
                     q: `${this.props.alcohol}`,
-                    per_page: 10
+                    per_page: 8
                 },
             }
         }).then((res) => {
@@ -178,49 +184,63 @@ class CocktailInfo extends React.Component {
             })
         });
     }
-
+    flip() {
+        this.setState({
+            flipped: !this.state.flipped,
+            clicked: true
+        })
+    }
     render() {
         const flickityOptions = {
             wrapAround: true,
             imagesLoaded: true,
-            initialIndex: 0,
+            initialIndex: 2,
+            pageDots: false,
             cellAlign: 'left',
             contain: true
         }
-
+        const cocktailName = this.props.cocktailName;
+        var flippedCSS = this.state.flipped ? " Card-Back-Flip" : " Card-Front-Flip";
+        if (!this.state.clicked) flippedCSS = "";
         return (
-            <div className="modal">
-                <div className="recipe">
-                    <h2>Recipe</h2>
-                    {this.state.recipe.map((recipeLine, index) =>
-                        <p className="recipeLines" key={index}>{recipeLine}</p>
-                    )}
-                </div>
-                {/* <div className="liquorImages"> */}
-                {this.state.liquors.length > 0 && this.state.recipe.length >0 ?
-                    <Flickity
-                        className={'carousel'}
-                        elementType={'div'}
-                        options={flickityOptions}
-                        imagesLoaded={true}>
-                        {this.state.liquors.map(liquor => {
-                            const liquorNameLink = liquor.name;
-                            const linkNoApostrophe = liquorNameLink.replace("'", "");
-                            const link = linkNoApostrophe.replace(/\s+/g, '-')
-                            console.log(link, liquor.id);
+            <div className="Card">
+                <div className={"Card-Front recipe" + flippedCSS}>
+                    <div className="recipe">
+                        <h2 className="recipeTitle">{this.state.cocktailName} Recipe</h2>
+                        
+                        {this.state.recipe.map((recipeLine, index) =>
+                            <p className="recipeLines" key={index}>{recipeLine}</p>
+                        )}
+                        <button className="viewBtn" onClick={this.flip}>VIEW LIQUOR OPTIONS</button>
+                        </div>
+                    </div>
+                <div className={"Card-Back liquorImages" + flippedCSS}>
+                  <div className="liquor">  
+                    {this.state.liquors.length > 0 && this.state.recipe.length >0 ?
+                        <Flickity
+                            className={'carousel'}
+                            elementType={'div'}
+                            options={flickityOptions}
+                            imagesLoaded={true}>
+                            {this.state.liquors.map(liquor => {
+                                const liquorNameLink = liquor.name
+                                const linkNoApostrophe = liquorNameLink.replace("'", "")
+                                const link = linkNoApostrophe.replace(/\s+/g, '-')
 
-                            return (<div key={liquor.id} className="liquorBottle">
-                                <img src={liquor.image_url} className="bottleImage" />
-                                <p className="liquorName">{liquor.name}</p>
-                                <p className="liquorPrice">{`$${liquor.price_in_cents * 0.01}`}</p>
-                                <p className="liquorMl">{`${liquor.package_unit_volume_in_milliliters
-                                    } ml`}</p>
-                                {<a style={{ display: "table-cell" }} href= {`http://www.lcbo.com/lcbo/product/${link}/${liquor.id}`} target="_blank">Purchase</a>} 
-                            </div>) 
-                        })};
-                </Flickity>
-                    : null}
-                {/* </div> */}
+                                return (<div key={liquor.id} className="liquorBottle">
+                                    <p className="liquorName">{liquor.name}</p>
+                                    <img src={liquor.image_url} className="bottleImage" />
+                                    <p className="liquorPrice">{`$${liquor.price_in_cents * 0.01}`}</p>
+                                    <p className="liquorMl">{`${liquor.package_unit_volume_in_milliliters
+                                        } ml`}</p>
+                                    {<a href= {`http://www.lcbo.com/lcbo/product/${link}/${liquor.id}`} target="_blank">Purchase this item</a>} 
+                                </div>) 
+                            })}
+                        </Flickity>
+                        : null}
+                    <button className="viewBtn" onClick={this.flip}>VIEW RECIPE</button>
+                    </div>
+                </div>
             </div>
         )
     }
