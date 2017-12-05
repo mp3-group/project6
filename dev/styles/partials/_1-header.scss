@@ -96,6 +96,22 @@ label[for='slideIn'] {
     top: 10%;
 }
 
+.fa-glass {
+    color: white;
+    text-shadow: 2px 2px 20px $fourthColour;
+    font-size: 14px;
+}
+
+.glassIcon {
+    color: $thirdColour;
+    font-size: 15px;
+    position: absolute;
+    top: 95%;
+    left: 43%;
+    font-family: $secondaryFontStyle;
+
+}
+
 
 
 
