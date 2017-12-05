@@ -48,7 +48,7 @@
     width: 100%;
     overflow-y: scroll;
     transition: all .5s cubic-bezier(.5, .2, .2, 1.2);
-    background: linear-gradient($secondaryOverlay, $secondaryOverlay), url(../../assets/coffeeBean1.png) bottom no-repeat;
+    background: linear-gradient($secondaryOverlay, $secondaryOverlay), url(../../public/assets/coffeeBean1.png) bottom no-repeat;
     background-size: contain;
     background-position: 50%;
     div {
