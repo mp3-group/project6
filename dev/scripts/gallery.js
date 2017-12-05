@@ -85,7 +85,7 @@ class Gallery extends React.Component {
                         <h2 className="liquorTitle">Vodka</h2>
                     </label>
                 </form>
-                    <p className="introText">Please select a Liquor to see delicious Coffee Cocktails</p>
+                    <p className="introText">Please select a liquor of your choice to view our delicious coffee cocktails.</p>
 
                 <ul className="cocktailDisplay">
 
@@ -229,8 +229,7 @@ class CocktailInfo extends React.Component {
                                 return (<div key={liquor.id} className="liquorBottle">
                                     <h2 className="liquorName">{liquor.name}</h2>
                                     <img src={liquor.image_url} className="bottleImage" />
-                                    <p className="liquorPrice">{`$${liquor.price_in_cents * 0.01}`}</p>
-                                    <p className="liquorMl">{`${liquor.package_unit_volume_in_milliliters
+                                    <p><span className="liquorPrice">{`$${liquor.price_in_cents * 0.01}`}</span> | {`${liquor.package_unit_volume_in_milliliters
                                         } ml`}</p>
                                     {<a href= {`http://www.lcbo.com/lcbo/product/${link}/${liquor.id}`} target="_blank">Purchase this bottle</a>} 
                                 </div>) 
