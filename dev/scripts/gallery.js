@@ -29,7 +29,6 @@ class Gallery extends React.Component {
                 q: 'coffee',
                 'allowedIngredient[]': alcohol,
                 'allowedCourse[]': 'course^course-Beverages',
-
                 attributes: {
                     course: "Cocktails"
                 },
@@ -151,6 +150,7 @@ class CocktailInfo extends React.Component {
 
             }
         }).then((res) => {
+            console.log(res.data);
             this.setState({
                 recipe: res.data.ingredientLines
             })
@@ -175,8 +175,10 @@ class CocktailInfo extends React.Component {
                 },
             }
         }).then((res) => {
+            console.log(res.data.result);
             this.setState({
                 liquors: res.data.result
+               
             })
         });
     }
@@ -240,7 +242,6 @@ class CocktailInfo extends React.Component {
             </div>
         )
     }
-
 }
 
 export default Gallery;

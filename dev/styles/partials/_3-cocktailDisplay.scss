@@ -7,6 +7,22 @@
     height: 80vh;
     margin: 20px auto 0;
     padding: 0;
+    /* Portrait tablet and small desktops */
+    @media (max-width: 940px) {
+        width: 85%;
+    }
+    /* Landscape phone to portrait tablet */
+    @media (max-width: 768px) {
+        top: 20%;
+        position: relative;
+        top: -140px;
+    }
+    /* Landscape phones and down */
+    @media (max-width: 480px) {
+        width: 95%;
+        position: relative;
+        top: -140px;
+    }
 }
 
 .cocktailDisplay li {
@@ -19,8 +35,15 @@
     box-shadow: 0 0 3px $fourthColour;
     // z-index: 10;
     position: relative;
+    /* Portrait tablet and small desktops */
+    @media (max-width: 940px) {
+        width: calc(33.33% - 10px)
+    }
+    /* Landscape phone to portrait tablet */
+    @media (max-width: 768px) {
+        top: 20%;
+    }
     &:nth-child(3n + 0) {
-
         margin-right: 0;
     }
     .btnShowInfo {
@@ -60,12 +83,12 @@
     }
     h2.cocktailName {
         margin: 0;
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: $thirdColour;
         text-shadow: 0 1px 1px $fourthColour;
         text-transform: uppercase;
         position: absolute;
-        top: 50%;
+        top: 45%;
         left:50%;
         transform: translate(-50%, -50%);
         display: none;
