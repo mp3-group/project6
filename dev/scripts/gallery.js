@@ -86,7 +86,7 @@ class Gallery extends React.Component {
                         <h2 className="liquorTitle">Vodka</h2>
                     </label>
                 </form>
-                    <p className="introText">Please select a liquor of your choice to view our delicious coffee cocktails.</p>
+                    <p className="introText">Select your liquor of choice to view our delicious coffee cocktails.</p>
 
                 <ul className="cocktailDisplay">
 
