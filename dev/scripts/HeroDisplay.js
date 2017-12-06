@@ -22,7 +22,7 @@ class HeroDisplay extends React.Component {
             <div className="hero">
                 <input type="checkbox" id='slideIn' onChange={this.handleHeroFade}/>
                 <label htmlFor="slideIn"><i className="fa fa-glass" aria-hidden="true"></i></label>
-                <p className="glassIcon">Click Glass to Begin Your Selection</p>
+                <p className="glassIcon">Click Glass and Make Your Selection</p>
                 {this.state.show === true ? <HeroText /> : null}
                 <div id="page1">
                   <Gallery />
@@ -40,7 +40,7 @@ class HeroText extends React.Component {
         return(
             <div>
                 <h1>Coffee Cocktails</h1>
-                    <p className="introText">Welcome to Moonbucks, your first choice for premium brand coffee. This holiday season, spice up your party with a specialty coffee cocktail. Select your preferred choice of liquor, then choose from our menu of specialty coffee cocktail recipes. Everyone loves coffee, so this year make your holiday party an event to remember.</p>  
+                    <p className="introText">Welcome to Moonbucks, your first choice for premium brand coffee. This holiday season, spice up your party with a specialty coffee cocktail. Select your preferred choice of liquor, and choose from our menu of specialty coffee cocktail recipes. Everyone loves coffee, so this year make your holiday party an event to remember.</p>  
             </div>
 
         )

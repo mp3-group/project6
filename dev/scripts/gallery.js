@@ -4,6 +4,7 @@ import Qs from 'qs';
 import flickity from 'flickity';
 import Flickity from 'react-flickity-component'
 import imagesLoaded from 'flickity-imagesloaded';
+import _ from 'underscore';
 
 
 class Gallery extends React.Component {
@@ -22,7 +23,7 @@ class Gallery extends React.Component {
     }
 
     getCocktails(alcohol) {
-        axios.get(`http://api.yummly.com/v1/api/recipes`, {
+        axios.get(`https://api.yummly.com/v1/api/recipes`, {
             params: {
                 _app_id: 'bd90db8c',
                 _app_key: '09d9084e61038c6296815d0591809343',
@@ -32,12 +33,11 @@ class Gallery extends React.Component {
                 attributes: {
                     course: "Cocktails"
                 },
-                per_page:9
             }
         }).then((res) => {
-            console.log(res.data);
+            const newArray = _.uniq(res.data.matches, obj => obj.recipeName).slice(0, 9);
             this.setState({
-                cocktails: res.data.matches.splice(0,9)
+                cocktails: newArray
             })
         })
     }
@@ -145,14 +145,13 @@ class CocktailInfo extends React.Component {
     }
 
     getCocktailRecipe() {
-        axios.get(`http://api.yummly.com/v1/api/recipe/${this.props.cocktailId}`, {
+        axios.get(`https://api.yummly.com/v1/api/recipe/${this.props.cocktailId}`, {
             params: {
                 _app_id: 'bd90db8c',
                 _app_key: '09d9084e61038c6296815d0591809343',
 
             }
         }).then((res) => {
-            console.log(res.data);
             this.setState({
                 recipe: res.data.ingredientLines
             })
@@ -163,7 +162,7 @@ class CocktailInfo extends React.Component {
     getLiquors() {
         axios({
             method: 'GET',
-            url: 'http://proxy.hackeryou.com',
+            url: 'https://proxy.hackeryou.com',
             dataResponse: 'json',
             paramsSerializer: function (params) {
                 return Qs.stringify(params, { arrayFormat: 'brackets' })
@@ -177,7 +176,6 @@ class CocktailInfo extends React.Component {
                 },
             }
         }).then((res) => {
-            console.log(res.data.result);
             this.setState({
                 liquors: res.data.result
                
@@ -226,11 +224,12 @@ class CocktailInfo extends React.Component {
                                 const liquorNameLink = liquor.name
                                 const linkNoApostrophe = liquorNameLink.replace("'", "")
                                 const link = linkNoApostrophe.replace(/\s+/g, '-')
+                                const liquorPrice = (liquor.price_in_cents * 0.01).toFixed(2)
 
                                 return (<div key={liquor.id} className="liquorBottle">
                                     <h2 className="liquorName">{liquor.name}</h2>
                                     <img src={liquor.image_url} className="bottleImage" />
-                                    <p><span className="liquorPrice">{`$${liquor.price_in_cents * 0.01}`}</span> | {`${liquor.package_unit_volume_in_milliliters
+                                    <p><span className="liquorPrice">{`$${liquorPrice}`}</span> | {`${liquor.package_unit_volume_in_milliliters
                                         } ml`}</p>
                                     {<a href= {`http://www.lcbo.com/lcbo/product/${link}/${liquor.id}`} target="_blank">Purchase this bottle</a>} 
                                 </div>) 
