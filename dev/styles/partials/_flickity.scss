@@ -10,15 +10,6 @@ http://flickity.metafizzy.co
 .carousel {
     width: 60%;
     margin: 0 auto;
-    @media (max-width: 1040px) {
-        width: 85%;
-    }
-    @media (max-width: 1000px) {
-        width: 90%;
-    }
-    @media (max-width: 940px) {
-        width: 100%;
-    }
 }
 
 .bottleImage {
@@ -28,3 +19,19 @@ http://flickity.metafizzy.co
 .liquorName {
     text-align: center;
 }
+
+//   @media (max-width: 1040px) {
+//       .carousel {
+//         width: 85%;
+//       }
+//     }
+//     @media (max-width: 1000px) {
+//         .carousel {
+//         width: 90%;
+//       }
+//     }
+//     @media (max-width: 940px) {
+//         .carousel {
+//         width: 100%;
+//       }
+//     }
