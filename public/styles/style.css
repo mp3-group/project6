@@ -579,20 +579,6 @@ http://flickity.metafizzy.co
     .popup_inner {
       left: 25%;
       right: 25%; } }
-<<<<<<< HEAD
-  @media (max-width: 940px) {
-    .popup_inner {
-      left: 20%;
-      right: 20%; } }
-  @media (max-width: 768px) {
-    .popup_inner {
-      left: 15%;
-      right: 15%; } }
-  @media (max-width: 480px) {
-    .popup_inner {
-      left: 10%;
-      right: 10%; } }
-=======
   @media (max-width: 1000px) {
     .popup_inner {
       left: 20%;
@@ -601,7 +587,18 @@ http://flickity.metafizzy.co
     .popup_inner {
       left: 15%;
       right: 15%; } }
->>>>>>> 60fe49e660d68fe0067cb41cc5271c97a64102b8
+
+@media (max-width: 940px) {
+  left: 20%;
+  right: 20%; }
+
+@media (max-width: 768px) {
+  left: 15%;
+  right: 15%; }
+
+@media (max-width: 480px) {
+  left: 10%;
+  right: 10%; }
 
 .recipe, .liquor {
   width: 70%;
@@ -610,8 +607,7 @@ http://flickity.metafizzy.co
   margin-top: 20px;
   background: white;
   border-radius: 10px;
-  opacity: 1;
-  box-shadow: 0 0 10px #13262f; }
+  opacity: 1; }
 
 .recipe {
   overflow-y: scroll; }
@@ -702,7 +698,7 @@ h2.liquorName {
     text-align: center;
     height: 90vh;
     border-radius: 10px;
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6), rgba(248, 251, 252, 0.9)), url(public/assets/hero.jpg) center;
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6), rgba(248, 251, 252, 0.9)), url(../../public/assets/hero.jpg) center;
     background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden; }
@@ -713,7 +709,7 @@ h2.liquorName {
       text-align: center;
       text-decoration: none;
       padding: 0 20px;
-      line-height: 1.4; }
+      line-height: 1.2; }
       .Card .Card-Front p span.liquorPrice,
       .Card .Card-Back p span.liquorPrice {
         font-weight: bolder; }
@@ -772,6 +768,15 @@ h2.liquorName {
     transition: color .3 ease; }
     .Card .viewBtn:hover {
       color: #B0A084; }
+    @media (max-width: 940px) {
+      .Card .viewBtn {
+        font-size: 1.4rem; } }
+    @media (max-width: 768px) {
+      .Card .viewBtn {
+        font-size: 1.2rem; } }
+    @media (max-width: 480px) {
+      .Card .viewBtn {
+        font-size: 1.1rem; } }
   .Card .Card-Front {
     z-index: 1; }
     .Card .Card-Front.Card-Back-Flip {
