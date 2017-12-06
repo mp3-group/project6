@@ -569,14 +569,14 @@ http://flickity.metafizzy.co
 .recipe, .liquor {
   width: 70%;
   margin: 0 auto;
-  height: 650px;
-  margin-top: 50px;
+  height: 80vh;
+  margin-top: 20px;
   background: white;
   border-radius: 10px;
   opacity: 1; }
 
 .recipe {
-  overflow: scroll; }
+  overflow-y: scroll; }
 
 h2.recipeTitle, h2.liquorName {
   font-family: "Abril Fatface", cursive;
@@ -613,13 +613,14 @@ h2.liquorName {
     left: 0%;
     right: 0%;
     width: 100%;
-    margin: 0 auto;
+    margin: 10px auto;
     text-align: center;
-    height: 750px;
+    height: 90vh;
     border-radius: 10px;
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6), rgba(248, 251, 252, 0.9)), url(../../public/assets/hero.jpg) center;
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6), rgba(248, 251, 252, 0.9)), url(public/assets/hero.jpg) center;
     background-size: cover;
-    background-repeat: no-repeat; }
+    background-repeat: no-repeat;
+    overflow: hidden; }
     .Card .Card-Front p,
     .Card .Card-Back p {
       font-size: 2.2rem;
@@ -636,9 +637,7 @@ h2.liquorName {
     font-family: "Lato", sans-serif;
     color: #583e23;
     text-align: center;
-    margin: 10px auto;
-    position: relative;
-    top: 80px; }
+    margin: 10px auto; }
     .Card a:hover {
       color: #bc8b58;
       text-decoration: none; }
