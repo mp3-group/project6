@@ -19,9 +19,19 @@
     bottom: 5%;
     margin: auto;
     background: transparent;
+    // border: 1px solid red;
     @media (max-width: 1040px) {
-        left: 25%;
-        right: 25%;
+      left: 25%;
+      right: 25%;
+  }
+  @media (max-width: 1000px) {
+      left: 20%;
+      right: 20%;
+  }
+  @media (max-width: 940px) {
+      left: 15%;
+      right: 15%;
+  }
     }
     @media (max-width: 940px) {
         left: 20%;
@@ -48,6 +58,7 @@
     background:white;
     border-radius: 10px;
     opacity: 1;
+    box-shadow: 0 0 10px $fourthColour;
 }
 .recipe {
   overflow-y: scroll;
