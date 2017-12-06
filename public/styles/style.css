@@ -212,7 +212,7 @@ html {
     .cocktailDisplay {
       top: 20%;
       position: relative;
-      top: -140px; } }
+      top: -90px; } }
   @media (max-width: 480px) {
     .cocktailDisplay {
       width: 95%;
