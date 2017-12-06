@@ -24,11 +24,14 @@
 .recipe, .liquor  {
     width: 70%;
     margin: 0 auto;
-    height: 650px;
-    margin-top: 50px;
+    height: 80vh;
+    margin-top: 20px;
     background:white;
     border-radius: 10px;
     opacity: 1;
+}
+.recipe {
+  overflow-y: scroll;
 }
 
 h2.recipeTitle{
@@ -76,13 +79,14 @@ $degree: 90deg;
     left:0%;
     right:0%;
     width: 100%;
-    margin: 0 auto;
+    margin: 10px auto;
     text-align: center;
-    height: 750px;
+    height: 90vh;
     border-radius: 10px;
-    background: linear-gradient(to bottom right, lighten($thirdOverlay, 85%), lighten($primaryOverlay, 85%), lighten($secondaryOverlay, 85%)), url(../../assets/hero.jpg) center;
+    background: linear-gradient(to bottom right, lighten($thirdOverlay, 85%), lighten($primaryOverlay, 85%), lighten($secondaryOverlay, 85%)), url(public/assets/hero.jpg) center;
     background-size: cover;
     background-repeat:no-repeat;
+    overflow: hidden;
     // margin-bottom: -$card-size / 2;
     
     p {
