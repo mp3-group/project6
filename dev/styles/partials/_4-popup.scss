@@ -65,23 +65,23 @@ h2.recipeTitle{
         letter-spacing: 1px;
         font-size:2.8rem;
         color: $primaryColour;
-        padding: 40px 25px 40px 25px;
+        padding: 30px 25px 25px 25px;
 
         @media (max-width: 1040px) {
             font-size:2.6rem;
-            padding: 30px 20px;
+            padding: 20px 20px;
         }
         @media (max-width: 940px) {
             font-size:2.3rem;
-            padding: 25px 15px;
+            padding: 20px 15px;
         }
         @media (max-width: 768px) {
             font-size:2.4rem;
-            padding: 20px 10px;
+            padding: 15px 10px;
         }
         @media (max-width: 480px) {
             font-size:2.2rem;
-            padding: 15px 5px;
+            padding: 10px 5px;
         }
     }
 h2.liquorName {
